@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="app-base" content="">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.svg">
+    <!-- SEO -->
+    <meta name="description" content="Discover the story, mission and team behind The Code Munk. Learn why we built India's most student-focused coding platform.">
+    <meta name="keywords" content="about the code munk, tcm story, coding platform india, ayushman chourasiya">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="The Code Munk">
+    <link rel="canonical" href="https://thecodemunk.in/insights.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website">
+    <meta property="og:site_name"   content="The Code Munk">
+    <meta property="og:url"         content="https://thecodemunk.in/insights.html">
+    <meta property="og:title"       content="TCM Insights — The Story Behind The Code Munk">
+    <meta property="og:description" content="Discover the story, mission and team behind The Code Munk. Learn why we built India's most student-focused coding platform.">
+    <meta property="og:image"       content="https://thecodemunk.in/assets/tcm-og-default.svg">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"      content="en_IN">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:site"        content="@thecodemunk">
+    <meta name="twitter:title"       content="TCM Insights — The Story Behind The Code Munk">
+    <meta name="twitter:description" content="Discover the story, mission and team behind The Code Munk. Learn why we built India's most student-focused coding platform.">
+    <meta name="twitter:image"       content="https://thecodemunk.in/assets/tcm-og-default.svg">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TCM">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/icon-96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/icon-72.png">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "The Code Munk",
+      "url": "https://thecodemunk.in",
+      "logo": "https://thecodemunk.in/assets/tcm-og-default.svg",
+      "description": "Discover the story, mission and team behind The Code Munk. Learn why we built India's most student-focused coding platform.",
+      "sameAs": [
+        "https://www.instagram.com/tcmone.academy",
+        "https://www.linkedin.com/company/thecodemunk",
+        "https://www.youtube.com/@thecodemunk"
+      ]
+    }
+    </script>
+    <title>TCM Insights &mdash; The Code Munk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/insights.css">
+    <link rel="stylesheet" href="./assets/skeleton.css">
+    <link rel="stylesheet" href="./assets/auth.css">
+
+    <!-- Founder card inline CSS (server-safe fallback) -->
+    <style>
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+    .ins-founders{padding:80px 0;background:#fafafa;border-top:1px solid #ececec;border-bottom:1px solid #ececec}
+    .fdr-wrap{max-width:920px;margin:0 auto}
+    .fdr-card{display:grid;grid-template-columns:260px 1fr;background:#fff;border:1px solid #e0e0e0;border-radius:24px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,.06)}
+    .fdr-photo-col{background:#111;display:flex;flex-direction:column;align-items:center;padding:40px 24px 32px;gap:18px;position:relative;overflow:hidden}
+    .fdr-photo-col::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+    .fdr-photo-frame{width:150px;height:150px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,.2);flex-shrink:0;position:relative;z-index:1;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+    .fdr-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+    .fdr-photo-badges{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;position:relative;z-index:1}
+    .fdr-badge-role{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:11px;font-weight:700;letter-spacing:.4px;padding:6px 14px;border-radius:50px;text-align:center;line-height:1.4}
+    .fdr-live-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0;box-shadow:0 0 6px #4ade80;animation:blink 1.5s ease infinite}
+    .fdr-badge-exp{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px}
+    .fdr-photo-stats{display:flex;flex-direction:column;gap:8px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px;position:relative;z-index:1}
+    .fdr-photo-stat{display:flex;align-items:center;gap:10px}
+    .fdr-photo-stat-icon{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:.78rem;color:rgba(255,255,255,.8);flex-shrink:0}
+    .fdr-photo-stat-text strong{display:block;font-size:12px;font-weight:700;color:#fff;line-height:1.2}
+    .fdr-photo-stat-text span{font-size:10px;color:rgba(255,255,255,.45)}
+    .fdr-socials{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;margin-top:auto}
+    .fdr-socials a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.6);display:grid;place-items:center;font-size:.85rem;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .15s}
+    .fdr-socials a:hover{background:#fff;color:#111;border-color:#fff;transform:translateY(-2px)}
+    .fdr-info-col{padding:32px 36px 36px;display:flex;flex-direction:column;gap:20px}
+    .fdr-name-row{border-bottom:1px solid #f0f0f0;padding-bottom:16px}
+    .fdr-name{font-size:26px;font-weight:800;color:#111;letter-spacing:-.6px;margin:0 0 5px;line-height:1.15}
+    .fdr-title{font-size:13px;color:#999;font-weight:500;display:block;line-height:1.5}
+    .fdr-bio{font-size:14.5px;color:#555;line-height:1.82;margin:0}
+    .fdr-bio strong{color:#111;font-weight:700}
+    .fdr-quote{background:#f8f8f8;border-left:3px solid #111;border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#555;font-style:italic;line-height:1.6}
+    .fdr-quote::before{content:'"';font-size:1.5rem;color:#ccc;line-height:0;vertical-align:-6px;margin-right:4px}
+    .fdr-career-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#bbb;margin-bottom:10px}
+    .fdr-career-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#f8f8f8;border:1px solid #ececec;border-radius:13px;padding:14px 16px}
+    .fdr-step{display:flex;align-items:center;gap:9px;flex:1;min-width:110px}
+    .fdr-step-icon{width:34px;height:34px;border-radius:9px;background:#efefef;border:1px solid #e5e5e5;display:grid;place-items:center;font-size:.82rem;color:#888;flex-shrink:0}
+    .fdr-step-icon-dark{background:#111;border-color:#111;color:#fff}
+    .fdr-step-info strong{font-size:12px;font-weight:700;color:#111;display:flex;align-items:center;gap:5px;line-height:1.25}
+    .fdr-step-info span{font-size:11px;color:#999;margin-top:2px;display:block}
+    .fdr-now-badge{font-size:9px;font-weight:800;background:#22c55e;color:#fff;padding:2px 6px;border-radius:20px;letter-spacing:.3px;vertical-align:middle;flex-shrink:0}
+    .fdr-step-arrow{color:#ccc;font-size:12px;flex-shrink:0;display:flex;align-items:center}
+    .fdr-skills{display:flex;flex-wrap:wrap;gap:7px}
+    .fdr-skills span{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#444;background:#f4f4f4;padding:6px 12px;border-radius:8px;border:1px solid #e8e8e8;transition:background .15s,color .15s,border-color .15s}
+    .fdr-skills span:hover{background:#111;color:#fff;border-color:#111}
+    .fdr-skills span i{font-size:10px;color:inherit;opacity:.7}
+    @media(max-width:900px){
+        .fdr-card{grid-template-columns:1fr}
+        .fdr-photo-col{flex-direction:row;align-items:flex-start;padding:24px;gap:20px;flex-wrap:wrap}
+        .fdr-photo-frame{width:100px;height:100px;flex-shrink:0}
+        .fdr-photo-badges{align-items:flex-start;flex:1;min-width:150px}
+        .fdr-photo-stats{width:100%;flex-direction:row;gap:12px;flex-wrap:wrap}
+        .fdr-photo-stat{flex:1;min-width:120px}
+        .fdr-socials{justify-content:flex-start;margin-top:0;width:100%}
+        .fdr-career-steps{flex-direction:column;align-items:flex-start;gap:10px}
+        .fdr-step-arrow{transform:rotate(90deg);margin-left:11px}
+        .fdr-info-col{padding:24px 24px 28px}
+    }
+    @media(max-width:576px){
+        .fdr-photo-col{flex-direction:column;align-items:center;text-align:center}
+        .fdr-photo-badges{align-items:center}
+        .fdr-photo-stats{flex-direction:column}
+        .fdr-socials{justify-content:center}
+        .fdr-name{font-size:22px}
+        .fdr-info-col{padding:20px}
+    }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+        <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg p-0">
+                <a class="navbar-brand logo" href="index.html">
+                    <img src="./assets/logo.png" alt="TCM One Logo" class="logo-img">
+                    <span class="logo-text">TCM <span class="logo-one">One</span></span>
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+                    <ul class="navbar-nav align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="programs.html">Programs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active-nav" href="insights.html">TCM Insights</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="community.html">Community</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="partner.html">Become a Partner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://app.thecodemunk.in" class="join-btn">Join Now</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section class="ins-hero">
+        <div class="container">
+            <div class="ins-hero-inner">
+                <div class="ins-hero-label">
+                    <span class="ins-dot"></span>
+                    The Code Munk &middot; Est. 2023
+                </div>
+                <h1>
+                    We Didn't Build a<br>
+                    Coaching Centre.<br>
+                    <em>We Built a Movement.</em>
+                </h1>
+                <p>
+                    TCM Insights is the story behind The Code Munk &mdash; why we started,
+                    who we are, what drives us, and where we're going.
+                </p>
+                <div class="ins-hero-scroll">
+                    <span>Scroll to explore</span>
+                    <i class="bi bi-arrow-down"></i>
+                </div>
+            </div>
+        </div>
+        <div class="ins-hero-grid-bg"></div>
+    </section>
+
+    <!-- ========== NUMBERS ========== -->
+    <section class="ins-numbers">
+        <div class="container">
+            <div class="ins-numbers-grid">
+                <div class="ins-num-item">
+                    <strong>1,200+</strong>
+                    <span>Students Trained</span>
+                </div>
+                <div class="ins-num-divider"></div>
+                <div class="ins-num-item">
+                    <strong>3 Years</strong>
+                    <span>Of Impact</span>
+                </div>
+                <div class="ins-num-divider"></div>
+                <div class="ins-num-item">
+                    <strong>5,000+</strong>
+                    <span>Community Members</span>
+                </div>
+                <div class="ins-num-divider"></div>
+                <div class="ins-num-item">
+                    <strong>10+</strong>
+                    <span>Courses Delivered</span>
+                </div>
+                <div class="ins-num-divider"></div>
+                <div class="ins-num-item">
+                    <strong>4.9 &#9733;</strong>
+                    <span>Average Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT &mdash; THE STORY ========== -->
+    <section class="ins-story">
+        <div class="container">
+            <div class="ins-story-grid">
+
+                <div class="ins-story-left">
+                    <span class="ins-tag">OUR STORY</span>
+                    <h2>Why The Code Munk<br>Even Exists</h2>
+                </div>
+
+                <div class="ins-story-right">
+                    <p class="ins-story-lead">
+                        Most students finish college without ever writing a
+                        real program. They know theory. They've memorised textbooks.
+                        But they've never built anything.
+                    </p>
+                    <p>
+                        That's the gap we saw. Not a lack of talent &mdash; a lack of
+                        direction. No structured path from "I want to code" to
+                        "I can build and deploy a full application." No mentor
+                        who talks in plain language. No community that makes you
+                        feel like you belong in tech.
+                    </p>
+                    <p>
+                        So in 2023, we built The Code Munk. Not another institute
+                        with fancy brochures and empty promises. A focused,
+                        practical, student-first learning system &mdash; where every
+                        session, every project and every interaction is designed
+                        to make you job-ready.
+                    </p>
+                    <div class="ins-story-pills">
+                        <span><i class="bi bi-check2-circle"></i> Project-First Learning</span>
+                        <span><i class="bi bi-check2-circle"></i> Honest Mentorship</span>
+                        <span><i class="bi bi-check2-circle"></i> Affordable Fees</span>
+                        <span><i class="bi bi-check2-circle"></i> Real Community</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MISSION & VISION ========== -->
+    <section class="ins-mv">
+        <div class="container">
+            <div class="ins-mv-grid">
+
+                <div class="ins-mv-card dark">
+                    <div class="ins-mv-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+                    <div class="ins-mv-label">Mission</div>
+                    <h3>Make Quality Tech Education Accessible to Every Student</h3>
+                    <p>
+                        Deliver structured, affordable and practical technology
+                        training that bridges the gap between classroom learning
+                        and real-world industry requirements &mdash; for every student,
+                        regardless of background.
+                    </p>
+                </div>
+
+                <div class="ins-mv-card light">
+                    <div class="ins-mv-icon"><i class="bi bi-eye-fill"></i></div>
+                    <div class="ins-mv-label">Vision</div>
+                    <h3>Build India's Largest Student-First Developer Community</h3>
+                    <p>
+                        Create an ecosystem where students don't just learn to code &mdash;
+                        they build projects, find opportunities, grow together and
+                        become the next generation of India's tech professionals.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOUNDERS ========== -->
+    <section class="ins-founders">
+        <div class="container">
+
+            <div class="ins-section-header">
+                <span class="ins-tag">THE TEAM</span>
+                <h2>The People Behind TCM</h2>
+                <p>Built by developers who've been in your shoes.</p>
+            </div>
+
+            <!-- â"€â"€ Founder Profile Card â"€â"€ -->
+            <div class="fdr-wrap">
+                <div class="fdr-card">
+
+                    <!-- Left: Photo col -->
+                    <div class="fdr-photo-col">
+                        <div class="fdr-photo-frame">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThC-SAn84eEcYPpjjN5pgMUGpiRPslJn_0xA&s"
+                                alt="Ayushman Chourasiya"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <!-- Role + exp badges below photo -->
+                        <div class="fdr-photo-badges">
+                            <span class="fdr-badge-role">
+                                <span class="fdr-live-dot"></span>
+                                Founder &amp; Lead Mentor
+                            </span>
+                            <span class="fdr-badge-exp">
+                                <i class="bi bi-briefcase-fill"></i>
+                                8+ Years Experience
+                            </span>
+                        </div>
+
+                        <!-- Key stats -->
+                        <div class="fdr-photo-stats">
+                            <div class="fdr-photo-stat">
+                                <div class="fdr-photo-stat-icon"><i class="bi bi-building"></i></div>
+                                <div class="fdr-photo-stat-text">
+                                    <strong>Aspire Systems</strong>
+                                    <span>Former employer</span>
+                                </div>
+                            </div>
+                            <div class="fdr-photo-stat">
+                                <div class="fdr-photo-stat-icon"><i class="bi bi-lightning-fill"></i></div>
+                                <div class="fdr-photo-stat-text">
+                                    <strong>Cognizant MNC</strong>
+                                    <span>Currently working</span>
+                                </div>
+                            </div>
+                            <div class="fdr-photo-stat">
+                                <div class="fdr-photo-stat-icon"><i class="bi bi-people-fill"></i></div>
+                                <div class="fdr-photo-stat-text">
+                                    <strong>1,200+ Students</strong>
+                                    <span>Mentored at TCM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social links -->
+                        <div class="fdr-socials">
+                            <a href="https://www.linkedin.com/in/ayushman-chourasiya" target="_blank" rel="noopener" title="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener" title="GitHub">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener" title="X / Twitter">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+                            <a href="mailto:ayushman@thecodemunk.com" title="Email">
+                                <i class="bi bi-envelope-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info col -->
+                    <div class="fdr-info-col">
+
+                        <div class="fdr-name-row">
+                            <h3 class="fdr-name">Ayushman Chourasiya</h3>
+                            <span class="fdr-title">Full Stack Developer &nbsp;&middot;&nbsp; MNC Engineer &nbsp;&middot;&nbsp; Educator &nbsp;&middot;&nbsp; Tech Mentor</span>
+                        </div>
+
+                        <p class="fdr-bio">
+                            With over <strong>8 years of hands-on industry experience</strong>, Ayushman has worked across
+                            two of India's leading tech organisations &mdash; starting his journey at <strong>Aspire Systems</strong>
+                            and currently engineering solutions at <strong>Cognizant</strong>, one of India's top MNCs.
+                            Along the way, he noticed a gap that no one was filling: students who had the drive but
+                            lacked real-world guidance to cross from college to a career in tech.
+                        </p>
+
+                        <div class="fdr-quote">
+                            I didn't build TCM because I wanted a startup. I built it because I was that student once &mdash;
+                            talented, confused, and without anyone to show me the way.
+                        </div>
+
+                        <!-- Career path -->
+                        <div class="fdr-career">
+                            <div class="fdr-career-label">Career Journey</div>
+                            <div class="fdr-career-steps">
+
+                                <div class="fdr-step">
+                                    <div class="fdr-step-icon">
+                                        <i class="bi bi-building"></i>
+                                    </div>
+                                    <div class="fdr-step-info">
+                                        <strong>Aspire Systems</strong>
+                                        <span>Software Engineer</span>
+                                    </div>
+                                </div>
+
+                                <div class="fdr-step-arrow">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+
+                                <div class="fdr-step">
+                                    <div class="fdr-step-icon fdr-step-icon-dark">
+                                        <i class="bi bi-lightning-fill"></i>
+                                    </div>
+                                    <div class="fdr-step-info">
+                                        <strong>Cognizant <span class="fdr-now-badge">Now</span></strong>
+                                        <span>MNC Engineer</span>
+                                    </div>
+                                </div>
+
+                                <div class="fdr-step-arrow">
+                                    <i class="bi bi-arrow-right"></i>
+                                </div>
+
+                                <div class="fdr-step">
+                                    <div class="fdr-step-icon fdr-step-icon-dark">
+                                        <i class="bi bi-code-slash"></i>
+                                    </div>
+                                    <div class="fdr-step-info">
+                                        <strong>The Code Munk <span class="fdr-now-badge">Now</span></strong>
+                                        <span>Founder &amp; Lead Mentor</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="fdr-skills">
+                            <span><i class="bi bi-code-slash"></i> Full Stack Dev</span>
+                            <span><i class="bi bi-diagram-3"></i> System Design</span>
+                            <span><i class="bi bi-database"></i> Databases</span>
+                            <span><i class="bi bi-cloud-fill"></i> Cloud &amp; DevOps</span>
+                            <span><i class="bi bi-people-fill"></i> Team Leadership</span>
+                            <span><i class="bi bi-mortarboard-fill"></i> Tech Education</span>
+                            <span><i class="bi bi-gear-wide-connected"></i> Enterprise Architecture</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========== VALUES ========== -->
+    <section class="ins-values">
+        <div class="container">
+            <div class="ins-section-header">
+                <span class="ins-tag">WHAT WE STAND FOR</span>
+                <h2>Values That Drive<br>Every Decision</h2>
+            </div>
+            <div class="ins-values-grid">
+                <div class="ins-value-item">
+                    <div class="ins-value-num">01</div>
+                    <h4>Students First</h4>
+                    <p>Every feature, every price, every session is designed keeping the student's growth as the only metric that matters.</p>
+                </div>
+                <div class="ins-value-item">
+                    <div class="ins-value-num">02</div>
+                    <h4>Honesty Always</h4>
+                    <p>No inflated placement numbers, no fake testimonials, no empty promises. Just straight talk about what we offer and what you'll get.</p>
+                </div>
+                <div class="ins-value-item">
+                    <div class="ins-value-num">03</div>
+                    <h4>Learn by Building</h4>
+                    <p>Theory has its place, but nothing teaches like building a real project, hitting errors and figuring your way through.</p>
+                </div>
+                <div class="ins-value-item">
+                    <div class="ins-value-num">04</div>
+                    <h4>Community Over Competition</h4>
+                    <p>We believe the best way to grow is together &mdash; not racing against each other but pulling everyone up together.</p>
+                </div>
+                <div class="ins-value-item">
+                    <div class="ins-value-num">05</div>
+                    <h4>Affordable Access</h4>
+                    <p>Great education shouldn't cost a fortune. We actively work to keep our pricing within reach of every student.</p>
+                </div>
+                <div class="ins-value-item">
+                    <div class="ins-value-num">06</div>
+                    <h4>Continuous Improvement</h4>
+                    <p>We update curricula, improve delivery and take feedback seriously because what worked last year may not be enough today.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== IMAGE CAROUSEL (reused from index) ========== -->
+    <section class="showcase-section ins-showcase">
+        <div class="container">
+            <div class="ins-section-header">
+                <span class="ins-tag">STUDENT SUCCESS</span>
+                <h2>Learning Milestones<br>Worth Celebrating</h2>
+                <p>From live classes and certifications to workshops and real student achievements.</p>
+            </div>
+        </div>
+
+        <div class="marquee-wrapper">
+            <div class="marquee-track">
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/Unpin_preso_1.gif" alt="Live Session">
+                    <div class="card-label">Live Session</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-forums-api/attachment/thread-81808123-11916540716902365728.jpeg" alt="Student Achievement">
+                    <div class="card-label">Student Achievement</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://i0.wp.com/blog.daffodil.family/wp-content/uploads/2020/04/DIA-online-class.png?resize=1038%2C576" alt="Online Class">
+                    <div class="card-label">Online Class</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-kms-prod/uZnD1GAr1Nw7FQpFR4WV8sgEZeunD1Tzc1vk" alt="Certification">
+                    <div class="card-label">Certification</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://lh3.googleusercontent.com/SMSBGzxiGagCIsIhKmnN9gMYjkTksdu_d6lKjD0kR40OTRMHC-YgI0zEJrIOUcBqAmbIDvOU3Vvcdidrh23Z34gTZvEw9eeMvwgBnw=e365-pa-nu-rw-w1280" alt="Workshop">
+                    <div class="card-label">Workshop</div>
+                </div>
+                <!-- Duplicates for infinite loop -->
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/Unpin_preso_1.gif" alt="Live Session">
+                    <div class="card-label">Live Session</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-forums-api/attachment/thread-81808123-11916540716902365728.jpeg" alt="Student Achievement">
+                    <div class="card-label">Student Achievement</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://i0.wp.com/blog.daffodil.family/wp-content/uploads/2020/04/DIA-online-class.png?resize=1038%2C576" alt="Online Class">
+                    <div class="card-label">Online Class</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-kms-prod/uZnD1GAr1Nw7FQpFR4WV8sgEZeunD1Tzc1vk" alt="Certification">
+                    <div class="card-label">Certification</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://lh3.googleusercontent.com/SMSBGzxiGagCIsIhKmnN9gMYjkTksdu_d6lKjD0kR40OTRMHC-YgI0zEJrIOUcBqAmbIDvOU3Vvcdidrh23Z34gTZvEw9eeMvwgBnw=e365-pa-nu-rw-w1280" alt="Workshop">
+                    <div class="card-label">Workshop</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="marquee-wrapper reverse">
+            <div class="marquee-track">
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-kms-prod/uZnD1GAr1Nw7FQpFR4WV8sgEZeunD1Tzc1vk" alt="Certification">
+                    <div class="card-label">Certification</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://i0.wp.com/blog.daffodil.family/wp-content/uploads/2020/04/DIA-online-class.png?resize=1038%2C576" alt="Online Class">
+                    <div class="card-label">Online Class</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://lh3.googleusercontent.com/SMSBGzxiGagCIsIhKmnN9gMYjkTksdu_d6lKjD0kR40OTRMHC-YgI0zEJrIOUcBqAmbIDvOU3Vvcdidrh23Z34gTZvEw9eeMvwgBnw=e365-pa-nu-rw-w1280" alt="Workshop">
+                    <div class="card-label">Workshop</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/Unpin_preso_1.gif" alt="Live Session">
+                    <div class="card-label">Live Session</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-forums-api/attachment/thread-81808123-11916540716902365728.jpeg" alt="Student Achievement">
+                    <div class="card-label">Student Achievement</div>
+                </div>
+                <!-- Duplicates -->
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-kms-prod/uZnD1GAr1Nw7FQpFR4WV8sgEZeunD1Tzc1vk" alt="Certification">
+                    <div class="card-label">Certification</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://i0.wp.com/blog.daffodil.family/wp-content/uploads/2020/04/DIA-online-class.png?resize=1038%2C576" alt="Online Class">
+                    <div class="card-label">Online Class</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://lh3.googleusercontent.com/SMSBGzxiGagCIsIhKmnN9gMYjkTksdu_d6lKjD0kR40OTRMHC-YgI0zEJrIOUcBqAmbIDvOU3Vvcdidrh23Z34gTZvEw9eeMvwgBnw=e365-pa-nu-rw-w1280" alt="Workshop">
+                    <div class="card-label">Workshop</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/Unpin_preso_1.gif" alt="Live Session">
+                    <div class="card-label">Live Session</div>
+                </div>
+                <div class="showcase-card">
+                    <img src="https://storage.googleapis.com/support-forums-api/attachment/thread-81808123-11916540716902365728.jpeg" alt="Student Achievement">
+                    <div class="card-label">Student Achievement</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== REVIEWS ========== -->
+    <section class="reviews-section ins-reviews">
+        <div class="container">
+            <div class="ins-section-header">
+                <span class="ins-tag">STUDENT REVIEWS</span>
+                <h2>What Students Say About<br>The Code Munk</h2>
+                <p>Real experiences from students who learned, built projects and gained practical exposure with TCM.</p>
+            </div>
+        </div>
+
+        <!-- Row 1 &mdash; left scroll -->
+        <div class="marquee-wrapper">
+            <div class="marquee-track">
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>The project-based learning approach helped me understand concepts much faster than traditional classes.</p>
+                    <div class="review-user">
+                        <div class="avatar">RS</div>
+                        <div><h5>Rahul Singh</h5><span>Web Development</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Before joining TCM, I only knew basic HTML. Now I can build complete responsive websites confidently.</p>
+                    <div class="review-user">
+                        <div class="avatar">AC</div>
+                        <div><h5>Ayush Chourasiya</h5><span>Full Stack Development</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Affordable fees and supportive mentors made learning technology easier than I ever expected.</p>
+                    <div class="review-user">
+                        <div class="avatar">PK</div>
+                        <div><h5>Priya Kumari</h5><span>Data Analysis</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>I got my first freelance project while still in the bootcamp. The mentors helped me figure out how to deliver it professionally.</p>
+                    <div class="review-user">
+                        <div class="avatar">VT</div>
+                        <div><h5>Vikas Tiwari</h5><span>Frontend Development</span></div>
+                    </div>
+                </div>
+                <!-- Duplicates -->
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>The project-based learning approach helped me understand concepts much faster than traditional classes.</p>
+                    <div class="review-user">
+                        <div class="avatar">RS</div>
+                        <div><h5>Rahul Singh</h5><span>Web Development</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Before joining TCM, I only knew basic HTML. Now I can build complete responsive websites confidently.</p>
+                    <div class="review-user">
+                        <div class="avatar">AC</div>
+                        <div><h5>Ayush Chourasiya</h5><span>Full Stack Development</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Affordable fees and supportive mentors made learning technology easier than I ever expected.</p>
+                    <div class="review-user">
+                        <div class="avatar">PK</div>
+                        <div><h5>Priya Kumari</h5><span>Data Analysis</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>I got my first freelance project while still in the bootcamp. The mentors helped me figure out how to deliver it professionally.</p>
+                    <div class="review-user">
+                        <div class="avatar">VT</div>
+                        <div><h5>Vikas Tiwari</h5><span>Frontend Development</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 &mdash; right scroll -->
+        <div class="marquee-wrapper reverse">
+            <div class="marquee-track">
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Mentorship at TCM helped me build confidence and improve my development skills significantly.</p>
+                    <div class="review-user">
+                        <div class="avatar">AM</div>
+                        <div><h5>Aman Mishra</h5><span>Computer Science</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Flexible timings helped me continue learning without affecting my college schedule at all.</p>
+                    <div class="review-user">
+                        <div class="avatar">SK</div>
+                        <div><h5>Saurabh Kumar</h5><span>Python Programming</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Real projects gave me practical exposure and improved my portfolio significantly before placements.</p>
+                    <div class="review-user">
+                        <div class="avatar">NK</div>
+                        <div><h5>Nikita Sharma</h5><span>Data Analysis</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>The WhatsApp community is where I learned the most &mdash; daily problems, peer discussion, real feedback.</p>
+                    <div class="review-user">
+                        <div class="avatar">RP</div>
+                        <div><h5>Rohan Pandey</h5><span>Full Stack Development</span></div>
+                    </div>
+                </div>
+                <!-- Duplicates -->
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Mentorship at TCM helped me build confidence and improve my development skills significantly.</p>
+                    <div class="review-user">
+                        <div class="avatar">AM</div>
+                        <div><h5>Aman Mishra</h5><span>Computer Science</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Flexible timings helped me continue learning without affecting my college schedule at all.</p>
+                    <div class="review-user">
+                        <div class="avatar">SK</div>
+                        <div><h5>Saurabh Kumar</h5><span>Python Programming</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>Real projects gave me practical exposure and improved my portfolio significantly before placements.</p>
+                    <div class="review-user">
+                        <div class="avatar">NK</div>
+                        <div><h5>Nikita Sharma</h5><span>Data Analysis</span></div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
+                    <p>The WhatsApp community is where I learned the most &mdash; daily problems, peer discussion, real feedback.</p>
+                    <div class="review-user">
+                        <div class="avatar">RP</div>
+                        <div><h5>Rohan Pandey</h5><span>Full Stack Development</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CUBOIDSOFT PARTNERSHIP ========== -->
+    <section class="ins-partner">
+        <div class="container">
+            <div class="ins-partner-card">
+                <div class="ins-partner-left">
+                    <span class="ins-tag">PARTNERSHIP</span>
+                    <h2>TCM &times; Cuboidsoft</h2>
+                    <p>
+                        The Code Munk is powered by Cuboidsoft &mdash; a software company
+                        that gives our top students real project experience, team
+                        collaboration exposure and internship opportunities before
+                        they even step into the job market.
+                    </p>
+                    <p>
+                        This isn't a placement cell. It's a genuine industry bridge &mdash;
+                        students get to work on live projects, learn professional
+                        workflows and build the kind of portfolio that actually
+                        impresses hiring managers.
+                    </p>
+                    <a href="#" class="ins-partner-btn">
+                        Learn More About Cuboidsoft
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="ins-partner-right">
+                    <div class="ins-partner-stat-grid">
+                        <div class="ins-partner-stat">
+                            <i class="bi bi-people-fill"></i>
+                            <strong>Real Team Environment</strong>
+                            <span>Work with actual developers in structured sprints</span>
+                        </div>
+                        <div class="ins-partner-stat">
+                            <i class="bi bi-kanban-fill"></i>
+                            <strong>Live Project Access</strong>
+                            <span>Contribute to products that are actually in use</span>
+                        </div>
+                        <div class="ins-partner-stat">
+                            <i class="bi bi-briefcase-fill"></i>
+                            <strong>Internship Pathways</strong>
+                            <span>Top performers get direct internship opportunities</span>
+                        </div>
+                        <div class="ins-partner-stat">
+                            <i class="bi bi-patch-check-fill"></i>
+                            <strong>Industry Certificate</strong>
+                            <span>Official certification from Cuboidsoft on completion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TIMELINE ========== -->
+    <section class="ins-timeline-section">
+        <div class="container">
+            <div class="ins-section-header">
+                <span class="ins-tag">THE JOURNEY</span>
+                <h2>How We Got Here</h2>
+            </div>
+            <div class="ins-timeline">
+                <div class="ins-tl-item">
+                    <div class="ins-tl-year">2023</div>
+                    <div class="ins-tl-content">
+                        <h4>The Beginning</h4>
+                        <p>The Code Munk launches with its first batch of 12 students. Classes on Google Meet, assignments on WhatsApp, and a lot of passion.</p>
+                    </div>
+                </div>
+                <div class="ins-tl-item">
+                    <div class="ins-tl-year">2024</div>
+                    <div class="ins-tl-content">
+                        <h4>Community Grows</h4>
+                        <p>500+ students trained. WhatsApp community crosses 1,000 members. First batch of students gets internships through Cuboidsoft.</p>
+                    </div>
+                </div>
+                <div class="ins-tl-item">
+                    <div class="ins-tl-year">2025</div>
+                    <div class="ins-tl-content">
+                        <h4>System Matures</h4>
+                        <p>Structured curriculum, proper LMS, multiple course tracks. 1,000+ students trained. Community hits 3,000 members across platforms.</p>
+                    </div>
+                </div>
+                <div class="ins-tl-item ins-tl-active">
+                    <div class="ins-tl-year">2026</div>
+                    <div class="ins-tl-content">
+                        <h4>Today</h4>
+                        <p>1,200+ trained. 5,000+ community. New website. More courses. Bigger ambitions. Same mission &mdash; making good tech education accessible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="ins-cta">
+        <div class="container">
+            <div class="ins-cta-card">
+                <span class="ins-tag light">START NOW</span>
+                <h2>Be Part of the Next<br>Chapter</h2>
+                <p>
+                    1,200+ students have already started. The next batch is filling up.
+                    Your seat is waiting.
+                </p>
+                <div class="ins-cta-btns">
+                    <a href="programs.html" class="ins-cta-primary">
+                        Explore Programs
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    <a href="community.html" class="ins-cta-secondary">
+                        Join Community
+                        <i class="bi bi-people"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== BOTTOM NAVIGATION (MOBILE) ========== -->
+    <nav class="bottom-nav">
+        <ul class="bottom-nav-menu">
+            <li class="bottom-nav-item">
+                <a href="index.html" class="bottom-nav-link">
+                    <i class="bi bi-house-fill"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="bottom-nav-item">
+                <a href="programs.html" class="bottom-nav-link">
+                    <i class="bi bi-book-fill"></i>
+                    <span>Programs</span>
+                </a>
+            </li>
+            <li class="bottom-nav-item">
+                <a href="insights.html" class="bottom-nav-link active">
+                    <i class="bi bi-lightbulb-fill"></i>
+                    <span>Insights</span>
+                </a>
+            </li>
+            <li class="bottom-nav-item">
+                <a href="community.html" class="bottom-nav-link">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Community</span>
+                </a>
+            </li>
+            <li class="bottom-nav-item">
+                <a href="contact.html" class="bottom-nav-link">
+                    <i class="bi bi-chat-dots-fill"></i>
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-card">
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <a href="index.html" class="footer-logo">TCM One</a>
+                        <p>Learn industry-ready skills, build real-world projects and gain practical experience with The Code Munk.</p>
+                        <div class="footer-social">
+                            <a href="https://www.instagram.com/tcmone.academy" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.linkedin.com/company/thecodemunk" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://www.youtube.com/@thecodemunk" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a>
+                            <a href="https://wa.me/919238695500" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i></a>
+                        </div>
+                        <div class="footer-tag"><i class="bi bi-check-circle-fill"></i> Student Focused Learning</div>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Training</h4>
+                            <a href="#">Full Stack Development</a>
+                            <a href="#">Data Analysis</a>
+                            <a href="#">Python Programming</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Programs</h4>
+                            <a href="#">Internship Program</a>
+                            <a href="#">Student Projects</a>
+                            <a href="#">Workshops</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Company</h4>
+                            <a href="insights.html">About Us</a>
+                            <a href="partner.html">Become a Partner</a>
+                            <a href="contact.html">Contact</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Resources</h4>
+                            <a href="#">Student Reviews</a>
+                            <a href="#">FAQ</a>
+                            <a href="#">Blog</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 The Code Munk. All rights reserved.</p>
+                                        <div class="footer-bottom-links">
+                        <a href="contact.html">Contact</a>
+                        <a href="insights.html">About</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/skeleton.js"></script>
+    <script src="./assets/auth.js"></script>
+    <script src="./assets/tcm-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(reg) {
+            console.log('[TCM PWA] SW registered:', reg.scope);
+        }).catch(function(err) {
+            console.log('[TCM PWA] SW registration failed:', err);
+        });
+    });
+}
+</script>
+</body>
+</html>
+

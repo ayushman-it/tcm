@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /programs.html
+Allow: /insights.html
+Allow: /contact.html
+Allow: /community.html
+Allow: /course-details.html
+Allow: /event-details.html
+Allow: /assets/
+Allow: /uploads/
+
+# Block private dashboard areas
+Disallow: /admin
+Disallow: /student
+Disallow: /auth
+Disallow: /api/
+Disallow: /src/
+Disallow: /views/
+Disallow: /config/
+Disallow: /database/
+Disallow: /storage/
+Disallow: /bin/
+Disallow: /*.php$
+
+# Allow public portfolio pages
+Allow: /portfolio/
+
+Sitemap: https://thecodemunk.in/sitemap.xml

@@ -1,0 +1,25 @@
+# Environment & secrets
+.env
+
+# Firebase service account — NEVER commit this
+storage/firebase-service-account.json
+
+# Utility scripts (delete after use)
+reseed.php
+debug-env.php
+fix_arrows.php
+migrate_payments.php
+
+# Install lock (created by setup.php)
+storage/installed.lock
+
+# Private uploads (résumés) and public uploads — keep the folders, ignore contents
+storage/resumes/*
+!storage/resumes/.gitkeep
+uploads/*
+!uploads/.gitkeep
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,10 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="round"><rect width="512" height="512" rx="115" ry="115"/></clipPath>
+  </defs>
+  <rect width="512" height="512" rx="115" ry="115" fill="#111111"/>
+  <!-- Code slash icon lines -->
+  <text x="256" y="210" font-family="Arial,sans-serif" font-size="130" font-weight="900" fill="#a5b4fc" text-anchor="middle">&lt;/&gt;</text>
+  <!-- TCM text -->
+  <text x="256" y="360" font-family="Arial,sans-serif" font-size="110" font-weight="900" fill="#ffffff" text-anchor="middle">TCM</text>
+</svg>

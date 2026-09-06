@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Health Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .icon-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .icon-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+        .icon-card .name {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .icon-card .url {
+            font-size: 10px;
+            color: #999;
+            word-break: break-all;
+        }
+        .icon-card.error {
+            border: 2px solid red;
+        }
+        .icon-card.success {
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Health Icons Test</h1>
+    <p>Testing icons from healthicons.org repository</p>
+    <div class="icon-grid" id="iconGrid"></div>
+
+    <script>
+        const testIcons = {
+            cardiac: 'https://healthicons.org/icons/svg/filled/specialties/cardiology.svg',
+            orthopedics: 'https://healthicons.org/icons/svg/filled/specialties/orthopaedics.svg',
+            oncology: 'https://healthicons.org/icons/svg/filled/specialties/oncology.svg',
+            urology: 'https://healthicons.org/icons/svg/filled/specialties/urology.svg',
+            gynecology: 'https://healthicons.org/icons/svg/filled/specialties/gynecology.svg',
+            ophthalmology: 'https://healthicons.org/icons/svg/filled/specialties/opthalmology.svg',
+            gastroenterology: 'https://healthicons.org/icons/svg/filled/specialties/gastroenterology.svg',
+            emergency: 'https://healthicons.org/icons/svg/filled/specialties/accident-and_emergency.svg',
+            pediatrics: 'https://healthicons.org/icons/svg/filled/specialties/pediatrics.svg',
+            spine: 'https://healthicons.org/icons/svg/filled/body/spine.svg',
+            dental: 'https://healthicons.org/icons/svg/filled/body/tooth.svg',
+            hair: 'https://healthicons.org/icons/svg/filled/body/head.svg',
+            wellness: 'https://healthicons.org/icons/svg/filled/specialties/gym.svg',
+            infertility: 'https://healthicons.org/icons/svg/filled/body/female-reproductive_system.svg',
+        };
+
+        const grid = document.getElementById('iconGrid');
+
+        Object.entries(testIcons).forEach(([name, url]) => {
+            const card = document.createElement('div');
+            card.className = 'icon-card';
+            
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = name;
+            
+            img.onload = () => {
+                card.classList.add('success');
+                console.log('✅', name, 'loaded');
+            };
+            
+            img.onerror = () => {
+                card.classList.add('error');
+                console.error('❌', name, 'failed', url);
+            };
+            
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'name';
+            nameDiv.textContent = name;
+            
+            const urlDiv = document.createElement('div');
+            urlDiv.className = 'url';
+            urlDiv.textContent = url;
+            
+            card.appendChild(img);
+            card.appendChild(nameDiv);
+            card.appendChild(urlDiv);
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
