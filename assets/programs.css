@@ -9,7 +9,7 @@
 
 /* ---- Page Hero ---- */
 .pg-hero {
-    padding: 70px 0 90px;
+    padding: 45px 0 50px;
     text-align: center;
     border-bottom: 1px solid #f1f1f1;
 }
@@ -23,29 +23,30 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 8px 18px;
     border: 1px solid #e5e5e5;
     border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 26px;
-}
-
-.pg-hero h1 {
-    font-size: clamp(2.6rem, 6vw, 5rem);
-    font-weight: 800;
-    letter-spacing: -2.5px;
-    line-height: 1.06;
-    color: #111;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #444444;
     margin-bottom: 18px;
 }
 
+.pg-hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    color: #111111;
+    margin-bottom: 12px;
+}
+
 .pg-hero p {
-    font-size: 17px;
-    color: #666;
-    line-height: 1.8;
-    margin-bottom: 36px;
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.7;
+    margin-bottom: 24px;
 }
 
 .pg-hero-stats {
@@ -54,8 +55,8 @@
     gap: 0;
     background: #fafafa;
     border: 1px solid #ececec;
-    border-radius: 16px;
-    padding: 18px 28px;
+    border-radius: 50px;
+    padding: 12px 24px;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -247,24 +248,25 @@
 .pg-events-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 20px;
 }
 
-/* ---- Event Card ---- */
+/* ---- Event Card (Zeroheight Aesthetic) ---- */
 .pg-event-card {
-    border: 1px solid #ececec;
-    border-radius: 24px;
-    padding: 24px;
-    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 16px;
+    padding: 20px 22px;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
-    transition: .3s ease;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.04);
 }
 
 .pg-event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 44px rgba(0,0,0,.07);
-    border-color: #d8d8d8;
+    transform: translateY(-3px);
+    border-color: #111111;
+    box-shadow: 0 10px 24px -4px rgba(16, 24, 40, 0.08);
 }
 
 /* Card Top Row */
@@ -272,19 +274,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 /* Status badges */
 .pg-status-badge {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: .5px;
     text-transform: uppercase;
-    padding: 5px 12px;
+    padding: 4px 12px;
     border-radius: 50px;
 }
 
@@ -307,52 +309,52 @@
 
 .pg-status-badge.past {
     background: #f5f5f5;
-    color: #888;
+    color: #888888;
     border: 1px solid #e5e5e5;
 }
 
 /* Type badge */
 .pg-type-badge {
     font-size: 11px;
-    font-weight: 700;
-    padding: 5px 12px;
+    font-weight: 800;
+    padding: 4px 12px;
     border-radius: 50px;
 }
 
 .pg-type-badge.free {
-    background: #111;
-    color: #fff;
+    background: #111111;
+    color: #ffffff;
 }
 
 .pg-type-badge.paid {
     background: #f4f4f4;
-    color: #555;
+    color: #555555;
     border: 1px solid #e5e5e5;
 }
 
 /* Category */
 .pg-card-cat {
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #aaa;
-    margin-bottom: 8px;
+    color: #667085;
+    margin-bottom: 6px;
 }
 
 .pg-event-card h3 {
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 10px;
-    color: #111;
+    font-size: 17.5px;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 8px;
+    color: #101828;
 }
 
 .pg-event-card > p {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 18px;
+    font-size: 13.5px;
+    color: #475467;
+    line-height: 1.6;
+    margin-bottom: 16px;
     flex: 1;
 }
 
@@ -368,37 +370,38 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
-    color: #777;
-    font-weight: 500;
+    font-size: 12.5px;
+    color: #667085;
+    font-weight: 600;
 }
 
 .pg-card-meta i {
     font-size: 13px;
+    color: #344054;
 }
 
 /* Seats */
 .pg-seats-wrap {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 }
 
 .pg-seats-bar {
     height: 5px;
-    background: #f0f0f0;
+    background: #f2f4f7;
     border-radius: 50px;
     overflow: hidden;
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 }
 
 .pg-seats-fill {
     height: 100%;
-    background: #111;
+    background: #111111;
     border-radius: 50px;
 }
 
 .pg-seats-wrap span {
     font-size: 12px;
-    color: #888;
+    color: #667085;
     font-weight: 500;
 }
 
@@ -408,9 +411,9 @@
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    color: #888;
+    color: #667085;
     font-weight: 600;
-    padding: 8px 0;
+    padding: 6px 0;
 }
 
 .past-seats i {
@@ -422,20 +425,32 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px 18px;
-    background: #111;
-    color: #fff;
+    padding: 11px 18px;
+    background: #111111;
+    color: #ffffff;
     text-decoration: none;
-    border-radius: 14px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: .2s;
+    border-radius: 50px;
+    font-size: 13.5px;
+    font-weight: 700;
+    transition: all 0.2s ease;
     margin-top: auto;
 }
 
 .pg-card-btn:hover {
-    background: #222;
-    color: #fff;
+    background: #222222;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(17, 17, 17, 0.15);
+}
+
+.pg-card-btn.secondary {
+    background: #f8fafc;
+    color: #111111;
+    border: 1px solid #eaecf0;
+}
+
+.pg-card-btn.secondary:hover {
+    background: #ffffff;
+    border-color: #111111;
 }
 
 .pg-card-btn.secondary {

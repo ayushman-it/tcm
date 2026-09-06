@@ -272,70 +272,68 @@ body:has(.hero) .header {
 .course-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 24px !important;
+    gap: 18px !important;
 }
 
 .course-card {
+    position: relative !important;
+    background: #ffffff !important;
     border: 1px solid #eaecf0 !important;
     border-radius: 16px !important;
     padding: 24px !important;
-    background: #ffffff !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.04) !important;
+    height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    position: relative !important;
-    height: 100% !important;
+    justify-content: space-between !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease !important;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04) !important;
 }
 
 .course-card:hover {
     transform: translateY(-4px) !important;
     border-color: #d0d5dd !important;
-    box-shadow: 0 12px 24px -4px rgba(16, 24, 40, 0.08), 0 4px 6px -2px rgba(16, 24, 40, 0.03) !important;
+    box-shadow: 0 12px 24px -4px rgba(16, 24, 40, 0.08), 0 4px 8px -2px rgba(16, 24, 40, 0.03) !important;
 }
 
-/* Top flex row (Icon + Price) */
-.course-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 16px;
+/* Zeroheight Top Row: Compact Header */
+.course-card-top,
+.course-card {
+    /* Support both wrappers */
 }
 
-/* Icon box */
+/* Icon Box - Clean Zeroheight light badge squircle */
 .course-icon {
     width: 44px !important;
     height: 44px !important;
-    border: 1px solid #eaecf0 !important;
     border-radius: 12px !important;
-    background: #f8f9fa !important;
-    display: flex !important;
+    background: #f8fafc !important;
+    border: 1px solid #eaecf0 !important;
+    color: #101828 !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    color: #101828 !important;
     font-size: 20px !important;
-    margin-bottom: 0 !important;
+    margin-bottom: 18px !important;
     flex-shrink: 0 !important;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+    transition: background 0.2s ease, border-color 0.2s ease !important;
 }
 
 .course-card:hover .course-icon {
-    background: #101828 !important;
-    color: #ffffff !important;
-    border-color: #101828 !important;
+    background: #f1f5f9 !important;
+    border-color: #d0d5dd !important;
+    color: #101828 !important;
 }
 
-/* Price */
+/* Price - Modern clean typography */
 .course-price {
     display: flex !important;
     align-items: baseline !important;
-    gap: 6px !important;
-    font-size: 18px !important;
+    gap: 8px !important;
+    font-size: 19px !important;
     font-weight: 700 !important;
     color: #101828 !important;
     letter-spacing: -0.02em !important;
-    margin-bottom: 0 !important;
+    margin-bottom: 12px !important;
 }
 
 .course-price span {
@@ -345,81 +343,278 @@ body:has(.hero) .header {
     text-decoration: line-through !important;
 }
 
-/* Title */
+/* Title - Crisp Zeroheight heading */
 .course-card h3 {
     font-size: 18px !important;
-    font-weight: 700 !important;
+    font-weight: 600 !important;
     color: #101828 !important;
     line-height: 1.35 !important;
-    letter-spacing: -0.02em !important;
-    margin-top: 12px !important;
+    letter-spacing: -0.01em !important;
+    margin-top: 0 !important;
     margin-bottom: 8px !important;
 }
 
-/* Description */
+/* Description - Compact, clean line height */
 .course-card p {
     color: #475467 !important;
     line-height: 1.55 !important;
     font-size: 14px !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 24px !important;
     flex-grow: 1 !important;
 }
 
-/* Action Link */
+/* Action Link - Pure Zeroheight Text Link (NO Background Box, NO Dark Fill on Hover!) */
 .course-card a {
     text-decoration: none !important;
     color: #101828 !important;
     font-weight: 600 !important;
     font-size: 14px !important;
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    gap: 8px !important;
     margin-top: auto !important;
-    padding-top: 16px !important;
-    border-top: 1px solid #f2f4f7 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    width: auto !important;
+    box-shadow: none !important;
     transition: color 0.2s ease !important;
-    width: 100% !important;
 }
 
 .course-card a i {
-    font-size: 16px !important;
+    font-size: 14px !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    color: #101828 !important;
+}
+
+.course-card:hover a,
+.course-card a:hover {
+    background: transparent !important;
+    color: #101828 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.course-card:hover a i,
+.course-card a:hover i {
+    transform: translateX(5px) !important;
+    color: #101828 !important;
+}
+
+/* ========================================
+   Zeroheight Compact Ecosystem / Vertical Cards
+   ======================================== */
+.vertical-card {
+    position: relative !important;
+    background: #ffffff !important;
+    border: 1px solid #eaecf0 !important;
+    border-radius: 14px !important;
+    padding: 20px 20px !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease !important;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04) !important;
+}
+
+.vertical-card.is-locked {
+    background: #fafbfc !important;
+}
+
+.vertical-card:hover {
+    transform: translateY(-3px) !important;
+    border-color: #d0d5dd !important;
+    box-shadow: 0 10px 24px -4px rgba(16, 24, 40, 0.06) !important;
+}
+
+.vertical-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 16px !important;
+}
+
+.vertical-card-icon {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    background: #f8fafc !important;
+    border: 1px solid #eaecf0 !important;
+    color: #101828 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    transition: background 0.2s ease, border-color 0.2s ease !important;
+}
+
+.vertical-card:hover .vertical-card-icon {
+    background: #f1f5f9 !important;
+    border-color: #d0d5dd !important;
+    color: #101828 !important;
+}
+
+.vertical-badge-unlocked {
+    font-size: 10px !important;
+    letter-spacing: 0.6px !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+    padding: 4px 10px !important;
+    border-radius: 50px !important;
+    background: #ecfdf3 !important;
+    color: #027a48 !important;
+    border: 1px solid #abefc6 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+.vertical-badge-locked {
+    font-size: 10px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    padding: 4px 10px !important;
+    border-radius: 50px !important;
+    background: #f2f4f7 !important;
+    color: #667085 !important;
+    border: 1px solid #eaecf0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.vertical-card-title {
+    font-size: 16.5px !important;
+    font-weight: 600 !important;
+    color: #101828 !important;
+    margin-bottom: 6px !important;
+    letter-spacing: -0.01em !important;
+}
+
+.vertical-card-desc {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    color: #475467 !important;
+    margin-bottom: 14px !important;
+}
+
+.vertical-features-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 16px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+}
+
+.vertical-features-list li {
+    font-size: 12.5px !important;
+    color: #344054 !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+}
+
+.vertical-features-list li i {
+    font-size: 14px !important;
+    color: #12b76a !important;
+    flex-shrink: 0 !important;
+}
+
+.vertical-card.is-locked .vertical-features-list li i {
+    color: #98a2b3 !important;
+}
+
+.vertical-card.is-locked .vertical-features-list li {
+    color: #667085 !important;
+}
+
+.vertical-card-footer {
+    padding-top: 14px !important;
+    border-top: 1px solid #f2f4f7 !important;
+}
+
+.vertical-cta-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 8px 13px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #101828 !important;
+    background: #f8fafc !important;
+    border: 1px solid #eaecf0 !important;
+    border-radius: 9px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.vertical-cta-btn i {
+    font-size: 13px !important;
     transition: transform 0.2s ease !important;
+    color: #344054 !important;
 }
 
-.course-card:hover a {
-    color: #e52e2e !important;
+.vertical-cta-btn:hover,
+.vertical-card:hover .vertical-cta-btn {
+    background: #f1f5f9 !important;
+    color: #101828 !important;
+    border-color: #d0d5dd !important;
 }
 
-.course-card:hover a i {
+.vertical-cta-btn:hover i,
+.vertical-card:hover .vertical-cta-btn i {
     transform: translateX(4px) !important;
+    color: #101828 !important;
+}
+
+.vertical-locked-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #667085 !important;
+    background: #f8fafc !important;
+    border: 1px dashed #eaecf0 !important;
+    border-radius: 9px !important;
+    cursor: default !important;
 }
 
 /* Responsiveness */
 @media (max-width: 991px) {
     .course-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 20px !important;
+        gap: 16px !important;
     }
 }
 
 @media (max-width: 575px) {
     .course-grid {
         grid-template-columns: 1fr !important;
-        gap: 16px !important;
+        gap: 14px !important;
     }
 
     .course-card {
-        padding: 20px 18px !important;
-        border-radius: 14px !important;
+        padding: 16px 16px !important;
+        border-radius: 12px !important;
     }
 
     .course-card h3 {
-        font-size: 17px !important;
+        font-size: 15.5px !important;
     }
 
     .course-card p {
-        font-size: 13.5px !important;
-        margin-bottom: 16px !important;
+        font-size: 12.5px !important;
+        margin-bottom: 14px !important;
     }
 }
 

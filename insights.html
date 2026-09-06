@@ -69,65 +69,342 @@
     <!-- Founder card inline CSS (server-safe fallback) -->
     <style>
     @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-    .ins-founders{padding:80px 0;background:#fafafa;border-top:1px solid #ececec;border-bottom:1px solid #ececec}
-    .fdr-wrap{max-width:920px;margin:0 auto}
-    .fdr-card{display:grid;grid-template-columns:260px 1fr;background:#fff;border:1px solid #e0e0e0;border-radius:24px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,.06)}
-    .fdr-photo-col{background:#111;display:flex;flex-direction:column;align-items:center;padding:40px 24px 32px;gap:18px;position:relative;overflow:hidden}
-    .fdr-photo-col::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
-    .fdr-photo-frame{width:150px;height:150px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,.2);flex-shrink:0;position:relative;z-index:1;box-shadow:0 8px 32px rgba(0,0,0,.4)}
-    .fdr-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-    .fdr-photo-badges{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;position:relative;z-index:1}
-    .fdr-badge-role{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:11px;font-weight:700;letter-spacing:.4px;padding:6px 14px;border-radius:50px;text-align:center;line-height:1.4}
-    .fdr-live-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0;box-shadow:0 0 6px #4ade80;animation:blink 1.5s ease infinite}
-    .fdr-badge-exp{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:11px;font-weight:600;padding:5px 12px;border-radius:50px}
-    .fdr-photo-stats{display:flex;flex-direction:column;gap:8px;width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px;position:relative;z-index:1}
-    .fdr-photo-stat{display:flex;align-items:center;gap:10px}
-    .fdr-photo-stat-icon{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:.78rem;color:rgba(255,255,255,.8);flex-shrink:0}
-    .fdr-photo-stat-text strong{display:block;font-size:12px;font-weight:700;color:#fff;line-height:1.2}
-    .fdr-photo-stat-text span{font-size:10px;color:rgba(255,255,255,.45)}
-    .fdr-socials{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;margin-top:auto}
-    .fdr-socials a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.6);display:grid;place-items:center;font-size:.85rem;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .15s}
-    .fdr-socials a:hover{background:#fff;color:#111;border-color:#fff;transform:translateY(-2px)}
-    .fdr-info-col{padding:32px 36px 36px;display:flex;flex-direction:column;gap:20px}
-    .fdr-name-row{border-bottom:1px solid #f0f0f0;padding-bottom:16px}
-    .fdr-name{font-size:26px;font-weight:800;color:#111;letter-spacing:-.6px;margin:0 0 5px;line-height:1.15}
-    .fdr-title{font-size:13px;color:#999;font-weight:500;display:block;line-height:1.5}
-    .fdr-bio{font-size:14.5px;color:#555;line-height:1.82;margin:0}
-    .fdr-bio strong{color:#111;font-weight:700}
-    .fdr-quote{background:#f8f8f8;border-left:3px solid #111;border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#555;font-style:italic;line-height:1.6}
-    .fdr-quote::before{content:'"';font-size:1.5rem;color:#ccc;line-height:0;vertical-align:-6px;margin-right:4px}
-    .fdr-career-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#bbb;margin-bottom:10px}
-    .fdr-career-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#f8f8f8;border:1px solid #ececec;border-radius:13px;padding:14px 16px}
-    .fdr-step{display:flex;align-items:center;gap:9px;flex:1;min-width:110px}
-    .fdr-step-icon{width:34px;height:34px;border-radius:9px;background:#efefef;border:1px solid #e5e5e5;display:grid;place-items:center;font-size:.82rem;color:#888;flex-shrink:0}
-    .fdr-step-icon-dark{background:#111;border-color:#111;color:#fff}
-    .fdr-step-info strong{font-size:12px;font-weight:700;color:#111;display:flex;align-items:center;gap:5px;line-height:1.25}
-    .fdr-step-info span{font-size:11px;color:#999;margin-top:2px;display:block}
-    .fdr-now-badge{font-size:9px;font-weight:800;background:#22c55e;color:#fff;padding:2px 6px;border-radius:20px;letter-spacing:.3px;vertical-align:middle;flex-shrink:0}
-    .fdr-step-arrow{color:#ccc;font-size:12px;flex-shrink:0;display:flex;align-items:center}
-    .fdr-skills{display:flex;flex-wrap:wrap;gap:7px}
-    .fdr-skills span{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#444;background:#f4f4f4;padding:6px 12px;border-radius:8px;border:1px solid #e8e8e8;transition:background .15s,color .15s,border-color .15s}
-    .fdr-skills span:hover{background:#111;color:#fff;border-color:#111}
-    .fdr-skills span i{font-size:10px;color:inherit;opacity:.7}
-    @media(max-width:900px){
+    .ins-founders {
+        padding: 72px 0;
+        background: #fafafa;
+        border-top: 1px solid #eaecf0;
+        border-bottom: 1px solid #eaecf0;
+    }
+    .fdr-wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+    }
+    .fdr-card {
+        display: grid;
+        grid-template-columns: 290px 1fr;
+        background: #ffffff;
+        border: 1px solid #eaecf0;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.04), 0 1px 2px rgba(16, 24, 40, 0.02);
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .fdr-card:hover {
+        border-color: #d0d5dd;
+        box-shadow: 0 4px 16px rgba(16, 24, 40, 0.06);
+    }
+    .fdr-photo-col {
+        background: #f8fafc;
+        border-right: 1px solid #eaecf0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 32px 24px;
+        gap: 18px;
+        position: relative;
+    }
+    .fdr-photo-frame {
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #ffffff;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08);
+    }
+    .fdr-photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+    .fdr-photo-badges {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        width: 100%;
+    }
+    .fdr-badge-role {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #ffffff;
+        border: 1px solid #eaecf0;
+        color: #101828;
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 50px;
+        text-align: center;
+        line-height: 1.4;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+    }
+    .fdr-live-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #12b76a;
+        flex-shrink: 0;
+        box-shadow: 0 0 6px rgba(18, 183, 106, 0.4);
+        animation: blink 1.5s ease infinite;
+    }
+    .fdr-badge-exp {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #ffffff;
+        border: 1px solid #eaecf0;
+        color: #475467;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 50px;
+    }
+    .fdr-photo-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #eaecf0;
+        border-radius: 12px;
+        padding: 12px 14px;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.02);
+    }
+    .fdr-photo-stat {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .fdr-photo-stat-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid #eaecf0;
+        display: grid;
+        place-items: center;
+        font-size: .8rem;
+        color: #344054;
+        flex-shrink: 0;
+    }
+    .fdr-photo-stat-text strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: #101828;
+        line-height: 1.25;
+    }
+    .fdr-photo-stat-text span {
+        font-size: 11px;
+        color: #667085;
+    }
+    .fdr-socials {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: auto;
+    }
+    .fdr-socials a {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid #eaecf0;
+        color: #475467;
+        display: grid;
+        place-items: center;
+        font-size: .85rem;
+        text-decoration: none;
+        transition: all .2s ease;
+    }
+    .fdr-socials a:hover {
+        background: #101828;
+        color: #ffffff;
+        border-color: #101828;
+        transform: translateY(-2px);
+    }
+    .fdr-info-col {
+        padding: 32px 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .fdr-name-row {
+        border-bottom: 1px solid #eaecf0;
+        padding-bottom: 16px;
+    }
+    .fdr-name {
+        font-size: 24px;
+        font-weight: 700;
+        color: #101828;
+        letter-spacing: -.4px;
+        margin: 0 0 4px;
+        line-height: 1.2;
+    }
+    .fdr-title {
+        font-size: 13px;
+        color: #667085;
+        font-weight: 500;
+        display: block;
+        line-height: 1.5;
+    }
+    .fdr-bio {
+        font-size: 14.5px;
+        color: #475467;
+        line-height: 1.7;
+        margin: 0;
+    }
+    .fdr-bio strong {
+        color: #101828;
+        font-weight: 600;
+    }
+    .fdr-quote {
+        background: #f8fafc;
+        border-left: 3px solid #101828;
+        border-radius: 0 10px 10px 0;
+        padding: 14px 18px;
+        font-size: 13.5px;
+        color: #101828;
+        font-style: italic;
+        line-height: 1.6;
+        font-weight: 500;
+    }
+    .fdr-quote::before {
+        content: '"';
+        font-size: 1.4rem;
+        color: #98a2b3;
+        line-height: 0;
+        vertical-align: -5px;
+        margin-right: 4px;
+    }
+    .fdr-career-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #667085;
+        margin-bottom: 8px;
+    }
+    .fdr-career-steps {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        background: #ffffff;
+        border: 1px solid #eaecf0;
+        border-radius: 12px;
+        padding: 14px 18px;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.02);
+    }
+    .fdr-step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        min-width: 130px;
+    }
+    .fdr-step-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #f8fafc;
+        border: 1px solid #eaecf0;
+        display: grid;
+        place-items: center;
+        font-size: .9rem;
+        color: #101828;
+        flex-shrink: 0;
+    }
+    .fdr-step-info strong {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #101828;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        line-height: 1.25;
+    }
+    .fdr-step-info span {
+        font-size: 11px;
+        color: #667085;
+        margin-top: 2px;
+        display: block;
+    }
+    .fdr-now-badge {
+        font-size: 9.5px;
+        font-weight: 700;
+        background: #ecfdf3;
+        color: #027a48;
+        border: 1px solid #abefc6;
+        padding: 2px 7px;
+        border-radius: 50px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        vertical-align: middle;
+        flex-shrink: 0;
+    }
+    .fdr-step-arrow {
+        color: #98a2b3;
+        font-size: 13px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+    }
+    .fdr-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .fdr-skills span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 500;
+        color: #344054;
+        background: #f8fafc;
+        padding: 5px 12px;
+        border-radius: 50px;
+        border: 1px solid #eaecf0;
+        transition: all .2s ease;
+    }
+    .fdr-skills span:hover {
+        background: #101828;
+        color: #ffffff;
+        border-color: #101828;
+    }
+    .fdr-skills span i {
+        font-size: 11px;
+        color: inherit;
+        opacity: .7;
+    }
+    @media(max-width:992px){
         .fdr-card{grid-template-columns:1fr}
-        .fdr-photo-col{flex-direction:row;align-items:flex-start;padding:24px;gap:20px;flex-wrap:wrap}
-        .fdr-photo-frame{width:100px;height:100px;flex-shrink:0}
-        .fdr-photo-badges{align-items:flex-start;flex:1;min-width:150px}
-        .fdr-photo-stats{width:100%;flex-direction:row;gap:12px;flex-wrap:wrap}
-        .fdr-photo-stat{flex:1;min-width:120px}
-        .fdr-socials{justify-content:flex-start;margin-top:0;width:100%}
-        .fdr-career-steps{flex-direction:column;align-items:flex-start;gap:10px}
+        .fdr-photo-col{border-right:none;border-bottom:1px solid #eaecf0;flex-direction:column;align-items:center;text-align:center;padding:28px 20px;gap:16px}
+        .fdr-photo-frame{width:130px;height:130px;flex-shrink:0;margin:0 auto}
+        .fdr-photo-badges{align-items:center;width:100%}
+        .fdr-photo-stats{width:100%;flex-direction:column;gap:8px}
+        .fdr-photo-stat{justify-content:flex-start;text-align:left}
+        .fdr-socials{justify-content:center;width:100%}
+        .fdr-career-steps{flex-direction:column;align-items:flex-start;gap:12px}
         .fdr-step-arrow{transform:rotate(90deg);margin-left:11px}
-        .fdr-info-col{padding:24px 24px 28px}
+        .fdr-info-col{padding:24px 20px}
     }
     @media(max-width:576px){
-        .fdr-photo-col{flex-direction:column;align-items:center;text-align:center}
+        .fdr-photo-col{padding:24px 16px}
+        .fdr-photo-frame{width:130px;height:130px}
         .fdr-photo-badges{align-items:center}
         .fdr-photo-stats{flex-direction:column}
         .fdr-socials{justify-content:center}
         .fdr-name{font-size:22px}
-        .fdr-info-col{padding:20px}
+        .fdr-info-col{padding:20px 16px}
+        .fdr-career-steps{padding:12px 14px}
+        .fdr-skills span{width:100%;justify-content:center}
     }
     </style>
 </head>
@@ -200,73 +477,45 @@
         <div class="ins-hero-grid-bg"></div>
     </section>
 
-    <!-- ========== NUMBERS ========== -->
-    <section class="ins-numbers">
-        <div class="container">
-            <div class="ins-numbers-grid">
-                <div class="ins-num-item">
-                    <strong>1,200+</strong>
-                    <span>Students Trained</span>
-                </div>
-                <div class="ins-num-divider"></div>
-                <div class="ins-num-item">
-                    <strong>3 Years</strong>
-                    <span>Of Impact</span>
-                </div>
-                <div class="ins-num-divider"></div>
-                <div class="ins-num-item">
-                    <strong>5,000+</strong>
-                    <span>Community Members</span>
-                </div>
-                <div class="ins-num-divider"></div>
-                <div class="ins-num-item">
-                    <strong>10+</strong>
-                    <span>Courses Delivered</span>
-                </div>
-                <div class="ins-num-divider"></div>
-                <div class="ins-num-item">
-                    <strong>4.9 &#9733;</strong>
-                    <span>Average Rating</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ========== ABOUT &mdash; THE STORY ========== -->
     <section class="ins-story">
         <div class="container">
             <div class="ins-story-grid">
 
                 <div class="ins-story-left">
-                    <span class="ins-tag">OUR STORY</span>
+                    <span class="ins-tag"><i class="bi bi-book"></i> OUR STORY</span>
                     <h2>Why The Code Munk<br>Even Exists</h2>
                 </div>
 
                 <div class="ins-story-right">
                     <p class="ins-story-lead">
-                        Most students finish college without ever writing a
-                        real program. They know theory. They've memorised textbooks.
-                        But they've never built anything.
+                        Most students finish college without ever writing a real program. They know theory. They've memorised textbooks. But they've never built anything.
                     </p>
                     <p>
-                        That's the gap we saw. Not a lack of talent &mdash; a lack of
-                        direction. No structured path from "I want to code" to
-                        "I can build and deploy a full application." No mentor
-                        who talks in plain language. No community that makes you
-                        feel like you belong in tech.
+                        That's the gap we saw. Not a lack of talent &mdash; a lack of direction. No structured path from "I want to code" to "I can build and deploy a full application." No mentor who talks in plain language. No community that makes you feel like you belong in tech.
                     </p>
                     <p>
-                        So in 2023, we built The Code Munk. Not another institute
-                        with fancy brochures and empty promises. A focused,
-                        practical, student-first learning system &mdash; where every
-                        session, every project and every interaction is designed
-                        to make you job-ready.
+                        So in 2023, we built The Code Munk. Not another institute with fancy brochures and empty promises. A focused, practical, student-first learning system &mdash; where every session, every project and every interaction is designed to make you job-ready.
                     </p>
-                    <div class="ins-story-pills">
-                        <span><i class="bi bi-check2-circle"></i> Project-First Learning</span>
-                        <span><i class="bi bi-check2-circle"></i> Honest Mentorship</span>
-                        <span><i class="bi bi-check2-circle"></i> Affordable Fees</span>
-                        <span><i class="bi bi-check2-circle"></i> Real Community</span>
+
+                    <!-- 4 Pillars Bar -->
+                    <div class="ins-story-pillars-bar">
+                        <div class="ins-pillar-chip">
+                            <i class="bi bi-code-slash"></i>
+                            <span>Project-First Learning</span>
+                        </div>
+                        <div class="ins-pillar-chip">
+                            <i class="bi bi-person-heart"></i>
+                            <span>Honest Mentorship</span>
+                        </div>
+                        <div class="ins-pillar-chip">
+                            <i class="bi bi-wallet2"></i>
+                            <span>Affordable Fees</span>
+                        </div>
+                        <div class="ins-pillar-chip">
+                            <i class="bi bi-people"></i>
+                            <span>Real Community</span>
+                        </div>
                     </div>
                 </div>
 
@@ -425,7 +674,7 @@
                                 </div>
 
                                 <div class="fdr-step">
-                                    <div class="fdr-step-icon fdr-step-icon-dark">
+                                    <div class="fdr-step-icon">
                                         <i class="bi bi-lightning-fill"></i>
                                     </div>
                                     <div class="fdr-step-info">
@@ -439,7 +688,7 @@
                                 </div>
 
                                 <div class="fdr-step">
-                                    <div class="fdr-step-icon fdr-step-icon-dark">
+                                    <div class="fdr-step-icon">
                                         <i class="bi bi-code-slash"></i>
                                     </div>
                                     <div class="fdr-step-info">
@@ -619,8 +868,8 @@
         <div class="container">
             <div class="ins-section-header">
                 <span class="ins-tag">STUDENT REVIEWS</span>
-                <h2>What Students Say About<br>The Code Munk</h2>
-                <p>Real experiences from students who learned, built projects and gained practical exposure with TCM.</p>
+                <h2>What Students Say About<br>TCM One</h2>
+                <p>Real experiences from students who learned, built projects and gained practical exposure with TCM One.</p>
             </div>
         </div>
 
@@ -629,67 +878,51 @@
             <div class="marquee-track">
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>The project-based learning approach helped me understand concepts much faster than traditional classes.</p>
+                    <p>"TCM One ki practical teaching, easy-to-understand classes, supportive mentors aur real projects sabse achhe lage. Practical coding ke liye best platform hai."</p>
                     <div class="review-user">
-                        <div class="avatar">RS</div>
-                        <div><h5>Rahul Singh</h5><span>Web Development</span></div>
+                        <div class="avatar">JG</div>
+                        <div><h5>Jayesh Ghalekar</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Before joining TCM, I only knew basic HTML. Now I can build complete responsive websites confidently.</p>
+                    <p>"Maine YouTube se padha lekin concepts clear nahi hote the. TCM One me live demo ke baad doubt clear ho gaye aur concepts easily samajh aane lage."</p>
                     <div class="review-user">
-                        <div class="avatar">AC</div>
-                        <div><h5>Ayush Chourasiya</h5><span>Full Stack Development</span></div>
+                        <div class="avatar">DB</div>
+                        <div><h5>Disha Budhrani</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Affordable fees and supportive mentors made learning technology easier than I ever expected.</p>
+                    <p>"Ayushman sir ki guidance aur problem-solving expertise sabse best hai. Daily live mentor support se web dev concepts deep me clear huye."</p>
                     <div class="review-user">
-                        <div class="avatar">PK</div>
-                        <div><h5>Priya Kumari</h5><span>Data Analysis</span></div>
+                        <div class="avatar">AM</div>
+                        <div><h5>Adarsh Mahurkar</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>I got my first freelance project while still in the bootcamp. The mentors helped me figure out how to deliver it professionally.</p>
+                    <p>"TCM One provides opportunities for personal growth and skill development. It helped improve my communication, leadership, and coding confidence significantly."</p>
                     <div class="review-user">
-                        <div class="avatar">VT</div>
-                        <div><h5>Vikas Tiwari</h5><span>Frontend Development</span></div>
+                        <div class="avatar">SU</div>
+                        <div><h5>Sakshi Somnath Umbare</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <!-- Duplicates -->
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>The project-based learning approach helped me understand concepts much faster than traditional classes.</p>
+                    <p>"TCM One ki practical teaching, easy-to-understand classes, supportive mentors aur real projects sabse achhe lage. Practical coding ke liye best platform hai."</p>
                     <div class="review-user">
-                        <div class="avatar">RS</div>
-                        <div><h5>Rahul Singh</h5><span>Web Development</span></div>
+                        <div class="avatar">JG</div>
+                        <div><h5>Jayesh Ghalekar</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Before joining TCM, I only knew basic HTML. Now I can build complete responsive websites confidently.</p>
+                    <p>"Maine YouTube se padha lekin concepts clear nahi hote the. TCM One me live demo ke baad doubt clear ho gaye aur concepts easily samajh aane lage."</p>
                     <div class="review-user">
-                        <div class="avatar">AC</div>
-                        <div><h5>Ayush Chourasiya</h5><span>Full Stack Development</span></div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Affordable fees and supportive mentors made learning technology easier than I ever expected.</p>
-                    <div class="review-user">
-                        <div class="avatar">PK</div>
-                        <div><h5>Priya Kumari</h5><span>Data Analysis</span></div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>I got my first freelance project while still in the bootcamp. The mentors helped me figure out how to deliver it professionally.</p>
-                    <div class="review-user">
-                        <div class="avatar">VT</div>
-                        <div><h5>Vikas Tiwari</h5><span>Frontend Development</span></div>
+                        <div class="avatar">DB</div>
+                        <div><h5>Disha Budhrani</h5><span>Web Development</span></div>
                     </div>
                 </div>
             </div>
@@ -700,67 +933,67 @@
             <div class="marquee-track">
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Mentorship at TCM helped me build confidence and improve my development skills significantly.</p>
+                    <p>"Sirf theory nahi, balki real projects ke through concepts samjhaye jaate hai, jisse skills aur confidence dono develop hote hai."</p>
                     <div class="review-user">
-                        <div class="avatar">AM</div>
-                        <div><h5>Aman Mishra</h5><span>Computer Science</span></div>
+                        <div class="avatar">PP</div>
+                        <div><h5>Palak Patle</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Flexible timings helped me continue learning without affecting my college schedule at all.</p>
+                    <p>"Consistency maintain nahi ho paati thi. TCM One join karke guidance, team collaboration aur ek friendly learning environment mila."</p>
                     <div class="review-user">
-                        <div class="avatar">SK</div>
-                        <div><h5>Saurabh Kumar</h5><span>Python Programming</span></div>
+                        <div class="avatar">HN</div>
+                        <div><h5>Harshit Nagpure</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Real projects gave me practical exposure and improved my portfolio significantly before placements.</p>
+                    <p>"Pehle proper roadmap nahi tha. TCM One me structured path, practical knowledge aur instant doubt resolution ne confidence boost kar diya."</p>
                     <div class="review-user">
-                        <div class="avatar">NK</div>
-                        <div><h5>Nikita Sharma</h5><span>Data Analysis</span></div>
+                        <div class="avatar">KC</div>
+                        <div><h5>Khushi Chouhan</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>The WhatsApp community is where I learned the most &mdash; daily problems, peer discussion, real feedback.</p>
+                    <p>"Sir answers every question and helps with any issue that arises. Along with solving doubts, he ensures we become capable of handling projects ourselves."</p>
                     <div class="review-user">
-                        <div class="avatar">RP</div>
-                        <div><h5>Rohan Pandey</h5><span>Full Stack Development</span></div>
+                        <div class="avatar">JS</div>
+                        <div><h5>Jyoti Soni</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <!-- Duplicates -->
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Mentorship at TCM helped me build confidence and improve my development skills significantly.</p>
+                    <p>"Sirf theory nahi, balki real projects ke through concepts samjhaye jaate hai, jisse skills aur confidence dono develop hote hai."</p>
                     <div class="review-user">
-                        <div class="avatar">AM</div>
-                        <div><h5>Aman Mishra</h5><span>Computer Science</span></div>
+                        <div class="avatar">PP</div>
+                        <div><h5>Palak Patle</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Flexible timings helped me continue learning without affecting my college schedule at all.</p>
+                    <p>"Consistency maintain nahi ho paati thi. TCM One join karke guidance, team collaboration aur ek friendly learning environment mila."</p>
                     <div class="review-user">
-                        <div class="avatar">SK</div>
-                        <div><h5>Saurabh Kumar</h5><span>Python Programming</span></div>
+                        <div class="avatar">HN</div>
+                        <div><h5>Harshit Nagpure</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>Real projects gave me practical exposure and improved my portfolio significantly before placements.</p>
+                    <p>"Pehle proper roadmap nahi tha. TCM One me structured path, practical knowledge aur instant doubt resolution ne confidence boost kar diya."</p>
                     <div class="review-user">
-                        <div class="avatar">NK</div>
-                        <div><h5>Nikita Sharma</h5><span>Data Analysis</span></div>
+                        <div class="avatar">KC</div>
+                        <div><h5>Khushi Chouhan</h5><span>Web Development</span></div>
                     </div>
                 </div>
                 <div class="review-card">
                     <div class="review-badge"><i class="bi bi-patch-check-fill"></i> Verified Student</div>
-                    <p>The WhatsApp community is where I learned the most &mdash; daily problems, peer discussion, real feedback.</p>
+                    <p>"Sir answers every question and helps with any issue that arises. Along with solving doubts, he ensures we become capable of handling projects ourselves."</p>
                     <div class="review-user">
-                        <div class="avatar">RP</div>
-                        <div><h5>Rohan Pandey</h5><span>Full Stack Development</span></div>
+                        <div class="avatar">JS</div>
+                        <div><h5>Jyoti Soni</h5><span>Web Development</span></div>
                     </div>
                 </div>
             </div>
@@ -883,88 +1116,83 @@
         </div>
     </section>
 
-    <!-- ========== BOTTOM NAVIGATION (MOBILE) ========== -->
-    <nav class="bottom-nav">
-        <ul class="bottom-nav-menu">
-            <li class="bottom-nav-item">
-                <a href="index.html" class="bottom-nav-link">
-                    <i class="bi bi-house-fill"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-            <li class="bottom-nav-item">
-                <a href="programs.html" class="bottom-nav-link">
-                    <i class="bi bi-book-fill"></i>
-                    <span>Programs</span>
-                </a>
-            </li>
-            <li class="bottom-nav-item">
-                <a href="insights.html" class="bottom-nav-link active">
-                    <i class="bi bi-lightbulb-fill"></i>
-                    <span>Insights</span>
-                </a>
-            </li>
-            <li class="bottom-nav-item">
-                <a href="community.html" class="bottom-nav-link">
-                    <i class="bi bi-people-fill"></i>
-                    <span>Community</span>
-                </a>
-            </li>
-            <li class="bottom-nav-item">
-                <a href="contact.html" class="bottom-nav-link">
-                    <i class="bi bi-chat-dots-fill"></i>
-                    <span>Contact</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
 
     <!-- ========== FOOTER ========== -->
+        <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-card">
                 <div class="footer-top">
+
+                    <!-- Brand Column -->
                     <div class="footer-brand">
-                        <a href="index.html" class="footer-logo">TCM One</a>
-                        <p>Learn industry-ready skills, build real-world projects and gain practical experience with The Code Munk.</p>
+                        <a href="index.html" class="footer-logo">TCM <span class="logo-one">One</span></a>
+                        <p>
+                            Learn industry-ready skills, build real-world projects and launch your tech career with The Code Munk.
+                        </p>
                         <div class="footer-social">
-                            <a href="https://www.instagram.com/tcmone.academy" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
-                            <a href="https://www.linkedin.com/company/thecodemunk" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
-                            <a href="https://www.youtube.com/@thecodemunk" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a>
-                            <a href="https://wa.me/919238695500" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.instagram.com/tcmoneindia?igsi=ZDdmM2xxZjNwNXIw&amp;utm_source=qr" target="_blank" rel="noopener" title="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="https://youtube.com/@tcmoneindia?si=8K2zGA0ki3LWJt7g" target="_blank" rel="noopener" title="YouTube"><i class="bi bi-youtube"></i></a>
+                            <a href="https://discord.gg/ERrrxgePj" target="_blank" rel="noopener" title="Discord"><i class="bi bi-discord"></i></a>
+                            <a href="https://tcmone.slack.com/archives/D0BUKS3K38F" target="_blank" rel="noopener" title="Slack"><i class="bi bi-slack"></i></a>
+                            <a href="https://github.com/tcmone" target="_blank" rel="noopener" title="GitHub"><i class="bi bi-github"></i></a>
+                            <a href="https://dev.to/tcmone" target="_blank" rel="noopener" title="Dev.to"><i class="bi bi-journal-code"></i></a>
+                            <a href="https://stackoverflow.com/users/33091425/tcmone" target="_blank" rel="noopener" title="Stack Overflow"><i class="bi bi-stack-overflow"></i></a>
+                            <a href="https://tcmonesspace.quora.com/?ch=17&amp;oid=8193858&amp;share=396067ef&amp;srid=5IUClU&amp;target_type=tribe" target="_blank" rel="noopener" title="Quora"><i class="bi bi-question-diamond"></i></a>
+                            <a href="https://www.facebook.com/share/1e8RrFuVeD/?mibextid=wwXIfr" target="_blank" rel="noopener" title="Facebook"><i class="bi bi-facebook"></i></a>
                         </div>
-                        <div class="footer-tag"><i class="bi bi-check-circle-fill"></i> Student Focused Learning</div>
+                        <div class="footer-tag">
+                            <i class="bi bi-patch-check-fill text-success"></i>
+                            Student-Focused Learning Platform
+                        </div>
                     </div>
+
+                    <!-- Navigation Links Columns -->
                     <div class="footer-links">
+
                         <div class="footer-column">
-                            <h4>Training</h4>
-                            <a href="#">Full Stack Development</a>
-                            <a href="#">Data Analysis</a>
-                            <a href="#">Python Programming</a>
+                            <h4>Learn &amp; Programs</h4>
+                            <a href="programs.html">Full Stack Web Dev</a>
+                            <a href="programs.html">Data Science &amp; AI</a>
+                            <a href="programs.html">Python &amp; Automation</a>
+                            <a href="programs.html">Live Workshops</a>
                         </div>
+
                         <div class="footer-column">
-                            <h4>Programs</h4>
-                            <a href="#">Internship Program</a>
-                            <a href="#">Student Projects</a>
-                            <a href="#">Workshops</a>
+                            <h4>Ecosystem</h4>
+                            <a href="index.html#verticals">TCM One Tech</a>
+                            <a href="index.html#verticals">TCM One IIT &amp; NEET</a>
+                            <a href="index.html#verticals">TCM One Govt Exams</a>
+                            <a href="index.html#verticals">TCM One Career</a>
                         </div>
+
                         <div class="footer-column">
-                            <h4>Company</h4>
+                            <h4>Legal &amp; Policy</h4>
+                            <a href="privacy.html">Privacy Policy</a>
+                            <a href="terms.html">Terms &amp; Conditions</a>
+                            <a href="sitemap.html">Site Map</a>
+                            <a href="partner.html">Partnership Policy</a>
+                        </div>
+
+                        <div class="footer-column">
+                            <h4>Company &amp; Help</h4>
                             <a href="insights.html">About Us</a>
-                            <a href="partner.html">Become a Partner</a>
-                            <a href="contact.html">Contact</a>
+                            <a href="community.html">Community</a>
+                            <a href="contact.html">Contact Us</a>
+                            <a href="https://app.thecodemunk.in">Student Sign In</a>
                         </div>
-                        <div class="footer-column">
-                            <h4>Resources</h4>
-                            <a href="#">Student Reviews</a>
-                            <a href="#">FAQ</a>
-                            <a href="#">Blog</a>
-                        </div>
+
                     </div>
                 </div>
+
+                <!-- Footer Bottom Strip -->
                 <div class="footer-bottom">
                     <p>&copy; 2026 The Code Munk. All rights reserved.</p>
-                                        <div class="footer-bottom-links">
+                    <div class="footer-bottom-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="sitemap.html">Sitemap</a>
                         <a href="contact.html">Contact</a>
                         <a href="insights.html">About</a>
                     </div>

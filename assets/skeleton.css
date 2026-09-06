@@ -29,8 +29,9 @@
 }
 
 .page-loader-logo {
-    height: 44px;
+    height: 52px;
     width: auto;
+    object-fit: contain;
     animation: loaderPulse 1.2s ease-in-out infinite;
 }
 

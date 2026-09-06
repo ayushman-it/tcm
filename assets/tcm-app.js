@@ -356,19 +356,20 @@
         var total = parseInt(ev.total_seats, 10) || 16;
         var filled = parseInt(ev.seats_filled, 10) || 0;
         var pct = total ? Math.round((filled / total) * 100) : 0;
-        var statusBadge = ev.status === "ongoing"
+        var isNonTech = ev.category === "jee-neet" || ev.category === "govt" || ev.status === "coming_soon";
+        var statusBadge = isNonTech
+            ? '<div class="pg-status-badge upcoming" style="background:#fff7ed; color:#c2410c; border:1px solid #ffedd5;">Coming Soon</div>'
+            : ev.status === "ongoing"
             ? '<div class="pg-status-badge ongoing"><span class="pg-live-dot"></span> Live Now</div>'
             : ev.status === "upcoming"
                 ? '<div class="pg-status-badge upcoming">Upcoming</div>'
                 : '<div class="pg-status-badge past">Completed</div>';
-        var seats = ev.status === "past"
-            ? '<div class="pg-seats-wrap past-seats"><span><i class="bi bi-check-circle-fill"></i> Event Completed</span></div>'
-            : '<div class="pg-seats-wrap"><div class="pg-seats-bar"><div class="pg-seats-fill" style="width:' + pct + '%"></div></div>' +
-              "<span>" + filled + " / " + total + " seats filled</span></div>";
-        var btn = ev.status === "past"
+        var btn = isNonTech
+            ? '<button class="pg-card-btn secondary disabled" disabled style="opacity:0.75; cursor:not-allowed;">Coming Soon <i class="bi bi-clock-history"></i></button>'
+            : ev.status === "past"
             ? '<a href="event-details.html?event=' + encodeURIComponent(ev.slug) + '" class="pg-card-btn secondary">View Recording <i class="bi bi-play-circle"></i></a>'
             : '<a href="event-details.html?event=' + encodeURIComponent(ev.slug) + '" class="pg-card-btn">View Event <i class="bi bi-arrow-right"></i></a>';
-        return '<div class="pg-event-card" data-status="' + esc(ev.status) + '" data-type="' + esc(ev.type) +
+        return '<div class="pg-event-card" data-status="' + esc(isNonTech ? "upcoming" : ev.status) + '" data-type="' + esc(ev.type) +
             '" data-cat="' + esc(ev.category) + '" data-title="' + esc((ev.title || "").toLowerCase()) + '">' +
             '<div class="pg-card-top">' + statusBadge +
                 '<div class="pg-type-badge ' + esc(ev.type) + '">' + (ev.type === "free" ? "Free" : "Paid") + "</div></div>" +
@@ -379,7 +380,7 @@
                 '<span><i class="bi bi-calendar-event"></i> ' + esc(fmtDate(ev.event_date)) + "</span>" +
                 (ev.event_time ? '<span><i class="bi bi-clock"></i> ' + esc(fmtTime(ev.event_time)) + "</span>" : "") +
                 '<span><i class="bi bi-laptop"></i> ' + esc((ev.mode || "online").charAt(0).toUpperCase() + (ev.mode || "online").slice(1)) + "</span>" +
-            "</div>" + seats + btn + "</div>";
+            "</div>" + btn + "</div>";
     }
 
     function hydrateOne(container) {
@@ -655,11 +656,60 @@
         if (isEventPage && !isCoursePage) hydrateEventDetail();
     }
 
+    function bindCourseWhatsAppCTA() {
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var now = new Date();
+        var currentMonth = months[now.getMonth()];
+        var currentYear = now.getFullYear();
+        var batchLabel = currentMonth + " Batch " + currentYear;
+        var phone = "919238695500";
+
+        // 1. programs.html event cards
+        document.querySelectorAll('.pg-event-card').forEach(function (card) {
+            var titleEl = card.querySelector('h3');
+            var btn = card.querySelector('.pg-card-btn');
+            if (titleEl && btn && btn.tagName === 'A') {
+                var courseTitle = titleEl.textContent.trim();
+                var msg = "Hello TCM One! I am interested in enrolling in " + courseTitle + " (" + batchLabel + "). Please share program details & fee structure.";
+                btn.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+                btn.target = "_blank";
+                btn.rel = "noopener";
+                btn.innerHTML = 'I\'m Interested <i class="bi bi-whatsapp"></i>';
+            }
+        });
+
+        // 2. index.html course cards
+        document.querySelectorAll('.course-card').forEach(function (card) {
+            var titleEl = card.querySelector('h3');
+            var btn = card.querySelector('a');
+            if (titleEl && btn) {
+                var courseTitle = titleEl.textContent.trim();
+                var msg = "Hello TCM One! I am interested in enrolling in " + courseTitle + " (" + batchLabel + "). Please share program details & fee structure.";
+                btn.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+                btn.target = "_blank";
+                btn.rel = "noopener";
+                btn.innerHTML = 'I\'m Interested <i class="bi bi-whatsapp"></i>';
+            }
+        });
+
+        // 3. course-details.html enroll button
+        var cdEnrollBtn = document.querySelector('.cd-enroll-btn');
+        if (cdEnrollBtn) {
+            var cdTitle = document.querySelector('.cd-hero-content h1') ? document.querySelector('.cd-hero-content h1').textContent.trim() : 'Full Stack Development';
+            var msg = "Hello TCM One! I am interested in enrolling in " + cdTitle + " (" + batchLabel + "). Please share enrollment steps.";
+            cdEnrollBtn.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+            cdEnrollBtn.target = "_blank";
+            cdEnrollBtn.rel = "noopener";
+            cdEnrollBtn.innerHTML = 'I\'m Interested <i class="bi bi-whatsapp"></i>';
+        }
+    }
+
     /* ================= BOOT ============================================ */
     ready(function () {
         wireContactForm();
         wireAuthModal();
         wireAuthExtras();
+        bindCourseWhatsAppCTA();
         getJSON(api("/api/me"))
             .then(function (res) { if (res && res.data) ME = Object.assign(ME, res.data); })
             .catch(function () {})
@@ -668,6 +718,7 @@
                 wireWhatsApp();
                 hydrateLists();
                 hydrateDetailPage();
+                bindCourseWhatsAppCTA();
             });
     });
 })();

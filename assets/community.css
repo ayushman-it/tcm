@@ -118,219 +118,152 @@
     margin: 0;
 }
 
-/* ---- Platform Cards ---- */
+/* ---- Platform Cards (Zeroheight System Aesthetic) ---- */
 .cm-platforms {
-    padding: 80px 0 100px;
-    background: #fff;
+    padding: 70px 0 90px;
+    background: #ffffff;
 }
 
 .cm-cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
 }
 
 .cm-platform-card {
-    border: 1px solid #ececec;
-    border-radius: 28px;
-    padding: 32px 28px;
-    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 16px;
+    padding: 20px 20px;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
-    transition: .3s ease;
+    justify-content: space-between;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
 }
 
 .cm-platform-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(0,0,0,.07);
+    transform: translateY(-3px);
+    border-color: #d0d5dd;
+    box-shadow: 0 10px 24px -4px rgba(16, 24, 40, 0.06);
 }
 
 .cm-platform-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 22px;
+    margin-bottom: 16px;
 }
 
 .cm-platform-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 18px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
-    border: 1px solid #eee;
+    font-size: 18px;
+    background: #f8fafc;
+    border: 1px solid #eaecf0;
+    color: #101828;
+    transition: all 0.2s ease;
 }
 
-/* Platform icon colors */
-.cm-wa .cm-platform-icon {
-    background: #e7f9ef;
-    color: #25d366;
-    border-color: #c3f0d1;
-}
-
-.cm-ig .cm-platform-icon {
-    background: #fce4ec;
-    color: #e1306c;
-    border-color: #f8bbca;
-}
-
-.cm-fb .cm-platform-icon {
-    background: #e8f0fe;
-    color: #1877f2;
-    border-color: #c5d9fc;
+.cm-platform-card:hover .cm-platform-icon {
+    background: #f1f5f9;
+    border-color: #d0d5dd;
+    color: #101828;
 }
 
 .cm-platform-badge {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 600;
     letter-spacing: .5px;
-    padding: 5px 12px;
+    text-transform: uppercase;
+    padding: 4px 10px;
     border-radius: 50px;
-    background: #f4f4f4;
-    color: #555;
+    background: #f8fafc;
+    color: #475467;
+    border: 1px solid #eaecf0;
 }
 
 .cm-platform-card h3 {
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 600;
     margin-bottom: 12px;
-    color: #111;
+    color: #101828;
+    letter-spacing: -0.2px;
 }
 
 .cm-platform-card > p {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.75;
-    margin-bottom: 22px;
+    display: none;
 }
 
 /* Perks */
 .cm-platform-perks {
     list-style: none;
     padding: 0;
-    margin: 0 0 24px;
+    margin: 0 0 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
 }
 
 .cm-platform-perks li {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: #444;
+    gap: 8px;
+    font-size: 12.5px;
+    color: #344054;
     font-weight: 500;
 }
 
 .cm-platform-perks li i {
-    font-size: 15px;
-    color: #111;
-    flex-shrink: 0;
-}
-
-/* Members Row */
-.cm-members-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 22px;
-    margin-top: auto;
-    padding-top: 18px;
-    border-top: 1px solid #f0f0f0;
-}
-
-.cm-member-avatars {
-    display: flex;
-}
-
-.cm-member-avatars span {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #f0f0f0;
-    border: 2px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: #555;
-    margin-left: -8px;
-}
-
-.cm-member-avatars span:first-child { margin-left: 0; }
-
-.cm-member-avatars .more {
-    background: #111;
-    color: #fff;
-    font-size: 10px;
-}
-
-.cm-online-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #22c55e;
-    flex-shrink: 0;
-    animation: blink 1.5s infinite;
-}
-
-.cm-members-row small {
-    font-size: 12px;
-    color: #888;
-    font-weight: 600;
-}
-
-/* Join Buttons */
-.cm-join-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    padding: 14px 20px;
-    border-radius: 14px;
-    font-weight: 700;
     font-size: 14px;
+    color: #12b76a;
+    flex-shrink: 0;
+}
+
+.cm-platform-footer {
+    padding-top: 14px;
+    border-top: 1px solid #f2f4f7;
+}
+
+/* Join Buttons - Compact Zeroheight action button */
+.cm-join-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 13px;
+    border-radius: 9px;
+    font-weight: 600;
+    font-size: 13px;
     text-decoration: none;
-    transition: .2s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
-    border: none;
+    background: #f8fafc;
+    color: #101828;
+    border: 1px solid #eaecf0;
 }
 
-.cm-wa-btn {
-    background: #25d366;
-    color: #fff;
+.cm-join-btn i {
+    font-size: 13px;
+    transition: transform 0.2s ease;
+    color: #344054;
 }
 
-.cm-wa-btn:hover {
-    background: #1db954;
-    color: #fff;
-    transform: translateY(-2px);
+.cm-join-btn:hover,
+.cm-platform-card:hover .cm-join-btn {
+    background: #f1f5f9;
+    color: #101828 !important;
+    border-color: #d0d5dd;
 }
 
-.cm-ig-btn {
-    background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: #fff;
-}
-
-.cm-ig-btn:hover {
-    opacity: .9;
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-.cm-fb-btn {
-    background: #1877f2;
-    color: #fff;
-}
-
-.cm-fb-btn:hover {
-    background: #0d65d9;
-    color: #fff;
-    transform: translateY(-2px);
+.cm-join-btn:hover i,
+.cm-platform-card:hover .cm-join-btn i {
+    transform: translateX(4px);
+    color: #101828;
 }
 
 /* ---- Inside Section ---- */
@@ -502,56 +435,78 @@
 
 /* ---- Final CTA ---- */
 .cm-cta {
-    padding: 100px 0;
-    background: #fafafa;
+    padding: 70px 0;
+    background: #fafbfc;
 }
 
 .cm-cta-card {
-    background: #111;
-    border-radius: 32px;
-    padding: 70px 60px;
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 24px;
+    padding: 56px 40px;
     text-align: center;
+    box-shadow: 0 4px 20px -2px rgba(16, 24, 40, 0.04), 0 2px 6px rgba(16, 24, 40, 0.02);
 }
 
 .cm-cta-card .section-tag {
-    color: #888;
+    color: #475467;
 }
 
 .cm-cta-card h2 {
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -2px;
-    color: #fff;
-    margin: 18px 0 16px;
-    line-height: 1.1;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    color: #101828;
+    margin: 16px 0 14px;
+    line-height: 1.15;
 }
 
 .cm-cta-card p {
-    color: #aaa;
-    font-size: 16px;
-    line-height: 1.8;
+    color: #475467;
+    font-size: 15.5px;
+    line-height: 1.65;
     max-width: 560px;
-    margin: 0 auto 40px;
+    margin: 0 auto 36px;
 }
 
 .cm-cta-btns {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 12px;
+}
+
+.cm-cta-btns .cm-join-btn {
+    width: auto !important;
+    min-width: 170px;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 13.5px;
+    font-weight: 600;
 }
 
 /* =============================================
    RESPONSIVE
    ============================================= */
 
-@media (max-width: 992px) {
+@media (max-width: 1199px) {
+    .cm-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (max-width: 767px) {
     .cm-cards-grid {
         grid-template-columns: 1fr;
-        max-width: 500px;
+        max-width: 440px;
         margin: 0 auto;
+        gap: 14px;
     }
+}
 
+@media (max-width: 992px) {
     .cm-inside-grid {
         grid-template-columns: repeat(2, 1fr);
     }

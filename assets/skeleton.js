@@ -210,7 +210,7 @@
         loader.id = 'pageLoader';
         loader.innerHTML = `
             <div class="page-loader-inner">
-                <img src="https://thecodemunk.in/tcm/tcm.png" alt="TCM" class="page-loader-logo">
+                <img src="./assets/logo.png" alt="TCM One Logo" class="page-loader-logo">
                 <div class="page-loader-bar-wrap">
                     <div class="page-loader-bar"></div>
                 </div>
