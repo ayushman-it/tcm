@@ -1,0 +1,90 @@
+name: Website CI/CD
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality:
+    name: PHP and release checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Scan tracked files for secrets
+        run: bash scripts/ci/check-secrets.sh
+
+      - name: Lint PHP
+        run: find . -type f -name '*.php' -not -path './release/*' -print0 | xargs -0 -n1 php -l
+
+      - name: Build production release package
+        run: bash scripts/ci/build-release.sh release
+
+      - name: Validate release package
+        run: |
+          test -f release/.release-manifest
+          test -f release/app.php
+          test ! -e release/.env
+          test ! -e release/setup.php
+          test ! -e release/prod-debug.php
+
+  deploy:
+    name: Deploy to Hostinger production
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.HOSTINGER_DEPLOY_ENABLED == 'true'
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://thecodemunk.in
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Build production release package
+        run: bash scripts/ci/build-release.sh release
+
+      - name: Configure SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.HOSTINGER_KNOWN_HOSTS }}
+        run: |
+          install -d -m 0700 "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$DEPLOY_KEY" > "$RUNNER_TEMP/ssh/key"
+          printf '%s\n' "$KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
+          chmod 0600 "$RUNNER_TEMP/ssh/key" "$RUNNER_TEMP/ssh/known_hosts"
+
+      - name: Upload immutable release candidate
+        env:
+          DEPLOY_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          DEPLOY_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+          DEPLOY_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+        run: |
+          ssh_opts=(-i "$RUNNER_TEMP/ssh/key" -o IdentitiesOnly=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -p "$DEPLOY_PORT")
+          remote_root="/home/$DEPLOY_USER/deployments/thecodemunk"
+          ssh "${ssh_opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p '$remote_root/candidates/$GITHUB_SHA'"
+          rsync -az --delete -e "ssh ${ssh_opts[*]}" release/ "$DEPLOY_USER@$DEPLOY_HOST:$remote_root/candidates/$GITHUB_SHA/"
+
+      - name: Activate, verify, and roll back on failure
+        env:
+          DEPLOY_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          DEPLOY_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+          DEPLOY_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+        run: |
+          ssh_opts=(-i "$RUNNER_TEMP/ssh/key" -o IdentitiesOnly=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -p "$DEPLOY_PORT")
+          public_root="/home/$DEPLOY_USER/domains/thecodemunk.in/public_html"
+          deploy_root="/home/$DEPLOY_USER/deployments/thecodemunk"
+          ssh "${ssh_opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "bash -s -- '$deploy_root' '$GITHUB_SHA' '$public_root' 'https://thecodemunk.in'" \
+            < scripts/deploy/remote-deploy.sh

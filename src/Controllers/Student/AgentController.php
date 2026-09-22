@@ -120,42 +120,42 @@ Class ek blueprint hai jisse hum objects banate hain. Jaise ghar ka blueprint ho
 
 \`\`\`javascript
 // Step 1: Class define karo
-class Student {{
+class Student {
     // Constructor - jab new student bane tab ye run hoga
-    constructor(name, age, course) {{
+    constructor(name, age, course) {
         this.name = name;
         this.age = age;
         this.course = course;
         this.marks = [];
-    }}
+    }
     
     // Method 1: Student ko introduce karna
-    introduce() {{
-        return `Namaste! Main ${{this.name}} hoon. Main ${{this.course}} course kar raha hoon.`;
-    }}
+    introduce() {
+        return `Namaste! Main \${this.name} hoon. Main \${this.course} course kar raha hoon.`;
+    }
     
     // Method 2: Marks add karna
-    addMarks(subject, score) {{
-        this.marks.push({{ subject, score }});
-        console.log(`${{subject}} mein ${{score}} marks add ho gaye!`);
-    }}
+    addMarks(subject, score) {
+        this.marks.push({ subject, score });
+        console.log(`\${subject} mein \${score} marks add ho gaye!`);
+    }
     
     // Method 3: Average marks nikalna
-    getAverage() {{
+    getAverage() {
         if (this.marks.length === 0) return 0;
         const total = this.marks.reduce((sum, m) => sum + m.score, 0);
         return total / this.marks.length;
-    }}
+    }
     
     // Method 4: Display all info
-    displayInfo() {{
+    displayInfo() {
         console.log('=== Student Details ===');
         console.log('Name:', this.name);
         console.log('Age:', this.age);
         console.log('Course:', this.course);
         console.log('Average Marks:', this.getAverage());
-    }}
-}}
+    }
+}
 
 // Step 2: Class use karo (Object banana)
 const raj = new Student('Raj Kumar', 20, 'Web Development');

@@ -11,7 +11,7 @@ Options -Indexes
     RewriteEngine On
 
     # Block direct access to application internals and secrets
-    RewriteRule ^(src|config|database|storage|views|bin)(/|$) - [F,L]
+    RewriteRule ^(src|config|database|storage|views|bin|docs)(/|$) - [F,L]
     RewriteRule (^|/)\.(env|git) - [F,L]
 
     # Serve real files and directories (HTML, CSS, JS, uploads) as-is
@@ -25,5 +25,11 @@ Options -Indexes
 
 # Belt-and-braces: deny dotfiles
 <FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Never expose one-time installers, diagnostics or migration utilities if they
+# are uploaded manually outside the controlled release pipeline.
+<FilesMatch "^(setup|prod-debug|quick-debug|test.*|check.*|fix.*|migrate.*|generate-content|generate_icons|setup-ai-content|verify_fixes)\.php$">
     Require all denied
 </FilesMatch>
