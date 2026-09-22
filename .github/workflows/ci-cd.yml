@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Scan tracked files for secrets
         run: bash scripts/ci/check-secrets.sh
@@ -50,7 +50,7 @@ jobs:
       url: https://thecodemunk.in
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build production release package
         run: bash scripts/ci/build-release.sh release
