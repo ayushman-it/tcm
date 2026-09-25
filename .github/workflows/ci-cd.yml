@@ -20,10 +20,15 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out source
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Scan tracked files for secrets
         run: bash scripts/ci/check-secrets.sh
+
+      - name: Validate delivery scripts
+        run: |
+          bash -n scripts/ci/*.sh scripts/deploy/*.sh
+          bash scripts/ci/check-workflows.sh
 
       - name: Lint PHP
         run: find . -type f -name '*.php' -not -path './release/*' -print0 | xargs -0 -n1 php -l
@@ -45,12 +50,15 @@ jobs:
     needs: quality
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    concurrency:
+      group: hostinger-production
+      cancel-in-progress: false
     environment:
       name: production
       url: https://thecodemunk.in
     steps:
       - name: Check out source
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Build production release package
         run: bash scripts/ci/build-release.sh release
@@ -60,6 +68,9 @@ jobs:
           DEPLOY_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
           KNOWN_HOSTS: ${{ secrets.HOSTINGER_KNOWN_HOSTS }}
         run: |
+          set -euo pipefail
+          test -n "$DEPLOY_KEY"
+          test -n "$KNOWN_HOSTS"
           install -d -m 0700 "$RUNNER_TEMP/ssh"
           printf '%s\n' "$DEPLOY_KEY" > "$RUNNER_TEMP/ssh/key"
           printf '%s\n' "$KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
@@ -67,22 +78,25 @@ jobs:
 
       - name: Upload immutable release candidate
         env:
-          DEPLOY_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
-          DEPLOY_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
-          DEPLOY_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+          DEPLOY_HOST: ${{ vars.HOSTINGER_SSH_HOST }}
+          DEPLOY_PORT: ${{ vars.HOSTINGER_SSH_PORT }}
+          DEPLOY_USER: ${{ vars.HOSTINGER_SSH_USER }}
         run: |
-          ssh_opts=(-i "$RUNNER_TEMP/ssh/key" -o IdentitiesOnly=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -p "$DEPLOY_PORT")
+          set -euo pipefail
+          test -n "$DEPLOY_HOST" && test -n "$DEPLOY_PORT" && test -n "$DEPLOY_USER"
+          ssh_opts=(-i "$RUNNER_TEMP/ssh/key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -p "$DEPLOY_PORT")
           remote_root="/home/$DEPLOY_USER/deployments/thecodemunk"
           ssh "${ssh_opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p '$remote_root/candidates/$GITHUB_SHA'"
           rsync -az --delete -e "ssh ${ssh_opts[*]}" release/ "$DEPLOY_USER@$DEPLOY_HOST:$remote_root/candidates/$GITHUB_SHA/"
 
       - name: Activate, verify, and roll back on failure
         env:
-          DEPLOY_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
-          DEPLOY_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
-          DEPLOY_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+          DEPLOY_HOST: ${{ vars.HOSTINGER_SSH_HOST }}
+          DEPLOY_PORT: ${{ vars.HOSTINGER_SSH_PORT }}
+          DEPLOY_USER: ${{ vars.HOSTINGER_SSH_USER }}
         run: |
-          ssh_opts=(-i "$RUNNER_TEMP/ssh/key" -o IdentitiesOnly=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -p "$DEPLOY_PORT")
+          set -euo pipefail
+          ssh_opts=(-i "$RUNNER_TEMP/ssh/key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -p "$DEPLOY_PORT")
           public_root="/home/$DEPLOY_USER/domains/thecodemunk.in/public_html"
           deploy_root="/home/$DEPLOY_USER/deployments/thecodemunk"
           ssh "${ssh_opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \

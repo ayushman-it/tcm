@@ -1,0 +1,70 @@
+name: Roll back Hostinger production
+
+on:
+  workflow_dispatch:
+    inputs:
+      backup_id:
+        description: "Retained backup directory ID (the SHA of the deployment that created it)"
+        required: true
+        type: string
+      confirmation:
+        description: "Type ROLLBACK to confirm"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  rollback:
+    if: inputs.confirmation == 'ROLLBACK'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://thecodemunk.in
+    concurrency:
+      group: hostinger-production
+      cancel-in-progress: false
+    steps:
+      - name: Check out rollback tooling
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Validate backup identifier
+        env:
+          BACKUP_ID: ${{ inputs.backup_id }}
+        run: '[[ "$BACKUP_ID" =~ ^[0-9a-f]{7,64}$ ]]'
+
+      - name: Configure SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.HOSTINGER_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_KEY"
+          test -n "$KNOWN_HOSTS"
+          install -d -m 0700 "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$DEPLOY_KEY" > "$RUNNER_TEMP/ssh/key"
+          printf '%s\n' "$KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
+          chmod 0600 "$RUNNER_TEMP/ssh/key" "$RUNNER_TEMP/ssh/known_hosts"
+
+      - name: Restore selected backup and verify
+        env:
+          BACKUP_ID: ${{ inputs.backup_id }}
+          DEPLOY_HOST: ${{ vars.HOSTINGER_SSH_HOST }}
+          DEPLOY_PORT: ${{ vars.HOSTINGER_SSH_PORT }}
+          DEPLOY_USER: ${{ vars.HOSTINGER_SSH_USER }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST" && test -n "$DEPLOY_PORT" && test -n "$DEPLOY_USER"
+          ssh_opts=(-i "$RUNNER_TEMP/ssh/key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" -p "$DEPLOY_PORT")
+          deploy_root="/home/$DEPLOY_USER/deployments/thecodemunk"
+          public_root="/home/$DEPLOY_USER/domains/thecodemunk.in/public_html"
+          ssh "${ssh_opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "bash -s -- '$deploy_root' '$BACKUP_ID' '$public_root' 'https://thecodemunk.in'" \
+            < scripts/deploy/remote-rollback.sh
+
+      - name: Verify public website
+        run: |
+          curl --fail --silent --show-error --retry 3 --retry-delay 2 --max-time 15 https://thecodemunk.in/health >/dev/null
+          curl --fail --silent --show-error --retry 3 --retry-delay 2 --max-time 15 https://thecodemunk.in/ >/dev/null
