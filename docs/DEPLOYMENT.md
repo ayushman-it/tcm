@@ -13,18 +13,33 @@ The GitHub Actions workflow in `.github/workflows/ci-cd.yml` is the only support
 
 Database migrations are deliberately not executed by this workflow. They require a separately reviewed, backward-compatible migration and backup plan.
 
-## Required GitHub production secrets
+## Required GitHub production configuration
+
+Environment secrets:
+
+- `HOSTINGER_SSH_PRIVATE_KEY`
+- `HOSTINGER_KNOWN_HOSTS`
+
+Environment variables:
 
 - `HOSTINGER_SSH_HOST`
 - `HOSTINGER_SSH_PORT`
 - `HOSTINGER_SSH_USER`
-- `HOSTINGER_SSH_PRIVATE_KEY`
-- `HOSTINGER_KNOWN_HOSTS`
 
-Configure branch protection so `PHP and release checks` is required before merging into `main`. Configure reviewers on the GitHub `production` environment if the account plan supports deployment approvals.
+The `production` environment accepts only `main`, requires one founder's approval, prevents self-review and prevents administrator bypass. The SSH host pin must be compared with an already trusted connection before it is stored. Every connection uses batch mode and strict host-key checking.
+
+Protect `main` so `PHP and release checks` and one independent approval are required before merging. Stale approvals must be dismissed, conversations resolved, force pushes blocked and deletion disabled.
 
 Deployment is disabled by default. A repository administrator must create the `production` environment, add the secrets above, then set the repository variable `HOSTINGER_DEPLOY_ENABLED` to `true`. Until then, CI runs normally and the production job is skipped.
 
 ## Manual rollback
 
-Automatic rollback runs on failed health checks. For a manual rollback, select a known-good directory from `~/deployments/thecodemunk/backups` and synchronize it to `public_html` with the same persistent-file exclusions used by `scripts/deploy/remote-deploy.sh`. Do not overwrite `.env`, `uploads`, or `storage`.
+Automatic rollback runs on failed deployment health checks. For an operator rollback, run **Roll back Hostinger production**, enter a retained backup directory ID and type `ROLLBACK`. The protected environment requires approval before SSH secrets become available.
+
+The rollback process locks production, validates the selected backup and all PHP files, snapshots the current application, preserves `.env`, uploads and storage, then checks `/health` and `/`. If rollback verification fails, it restores the pre-rollback snapshot automatically. Backup directory IDs are the SHA of the deployment that created the pre-deploy snapshot; confirm the desired release from the deployment log before approval.
+
+## Credential handling
+
+Only `.env.example` may be tracked. `.env`, `.env.production` and every other environment-specific file are excluded and rejected by CI. A committed credential must be removed from current source and rotated at its provider; deleting the file from Git does not revoke historical values.
+
+Firebase web configuration is distributed to browsers by design. Its Google API key must be restricted in Google Cloud to the approved web origins and required APIs; it is not a substitute for a privileged FCM server credential. Server credentials must never appear in browser assets.
